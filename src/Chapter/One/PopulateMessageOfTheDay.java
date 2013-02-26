@@ -10,7 +10,7 @@ import java.sql.SQLException;
 //Chapter 1 : An Introduction to Hibernate 3
 
 // Populates the HSQL Database with a message
-public class ConnectedPopulate {
+public class PopulateMessageOfTheDay {
 
   public static void main(String[] args) {
     try {
