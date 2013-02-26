@@ -6,6 +6,7 @@ import java.io.Serializable;
 // Authors: Dave Minter, Jeff Linwood
 // pages 4, 5
 public class MessageOfTheDay implements Serializable {
+
   protected MessageOfTheDay() {
   }
 
@@ -14,22 +15,23 @@ public class MessageOfTheDay implements Serializable {
     this.message = message;
   }
 
+  private int id;
+
   public int getId() {
     return id;
-  }
-
-  public String getMessage() {
-    return message;
   }
 
   public void setId(int id) {
     this.id = id;
   }
 
+  private String message;
+
+  public String getMessage() {
+    return message;
+  }
+
   public void setMessage(String message) {
     this.message = message;
   }
-
-  private int id;
-  private String message;
 }
