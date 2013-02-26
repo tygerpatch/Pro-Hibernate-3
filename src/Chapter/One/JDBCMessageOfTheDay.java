@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * A class which can display a message of the day from the database -
  * illustrates the volume of boilerplate required for correct JDBC usage.
  */
-public class ConnectedMessageOfTheDay {
+public class JDBCMessageOfTheDay {
 
   public static void main(String[] args) {
     try {
