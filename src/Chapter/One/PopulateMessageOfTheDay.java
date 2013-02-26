@@ -34,7 +34,7 @@ public class PopulateMessageOfTheDay {
 
     try {
       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_jdbc", "root", "password");
-      preparedStatement = connection.prepareStatement("insert into MessageOfTheDay (id, message) values (?, ?)");
+      preparedStatement = connection.prepareStatement("INSERT INTO MessageOfTheDay (id, message) VALUES (?, ?)");
 
       preparedStatement.setInt(1, 42);                                  // messageId
       preparedStatement.setString(2, "This is the message of the day"); // message
