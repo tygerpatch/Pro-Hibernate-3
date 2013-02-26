@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 // Title: Pro Hibernate 3
 // Authors: Dave Minter, Jeff Linwood
+// Chapter 1 : An Introduction to Hibernate 3
 // pages 4, 5
 public class MessageOfTheDay implements Serializable {
 
