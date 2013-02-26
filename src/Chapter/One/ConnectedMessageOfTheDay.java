@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
@@ -19,87 +17,63 @@ import java.util.logging.Logger;
 public class ConnectedMessageOfTheDay {
 
   public static void main(String[] args) {
-    if (args.length != 1) {
-      System.err.println("Nope, enter one message number");
+    try {
+      Class.forName("com.mysql.jdbc.Driver").newInstance();
     }
-    else {
-      try {
-        int messageId = Integer.parseInt(args[0]);
-        MessageOfTheDay motd = getMotd(messageId);
-        if (motd != null) {
-          System.out.println(motd.getMessage());
-        }
-        else {
-          System.out.println("No such message");
-        }
-      }
-      catch (NumberFormatException e) {
-        System.err.println("You must enter an integer - " + args[0]
-            + " won't do.");
-      }
-      catch (MessageOfTheDayException e) {
-        System.err.println("Couldn't get the message: " + e);
-      }
+    catch (ClassNotFoundException classNotFound) {
+      classNotFound.printStackTrace();
+      return;
     }
-  }
+    catch (IllegalAccessException illegalAccess) {
+      illegalAccess.printStackTrace();
+      return;
+    }
+    catch (InstantiationException instantiation) {
+      instantiation.printStackTrace();
+      return;
+    }
 
-  // pages 5 and 6
-  public static MessageOfTheDay getMotd(int messageId)
-      throws MessageOfTheDayException {
-    Connection c = null;
-    PreparedStatement p = null;
-    MessageOfTheDay message = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
     try {
+      connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_jdbc", "root", "password");
 
-      // This would tend to reduce to a single line from three
-      Class.forName("org.hsqldb.jdbcDriver");
-      c = DriverManager.getConnection("jdbc:hsqldb:file:messagedb", "sa", "");
-      p = c.prepareStatement("select message from motd where id = ?");
+      preparedStatement = connection.prepareStatement("SELECT message FROM MessageOfTheDay WHERE id = ?");
+      preparedStatement.setInt(1, 42); // messageId
 
-      p.setInt(1, messageId);
-      ResultSet rs = p.executeQuery();
+      ResultSet resultSet = preparedStatement.executeQuery();
 
-      if (rs.next()) {
-        String text = rs.getString(1);
-        message = new MessageOfTheDay(messageId, text);
+      if (resultSet.next()) {
+        MessageOfTheDay messageOfTheDay = new MessageOfTheDay();
+        messageOfTheDay.setMessage(resultSet.getString(1));
+        messageOfTheDay.setId(42);
 
-        if (rs.next()) {
-          log.warning("Multiple messages retrieved for message ID: "
-              + messageId);
-        }
+        System.out.println(messageOfTheDay.getMessage());
       }
-
     }
-    catch (Exception e) {
-      log.log(Level.SEVERE, "Could not acquire message", e);
-      throw new MessageOfTheDayException(
-          "Failed to retrieve message from the database.", e);
+    catch (SQLException sql) {
+      sql.printStackTrace();
     }
     finally {
-      if (p != null) {
+      if (preparedStatement != null) {
         try {
-          p.close();
+          preparedStatement.close();
         }
-        catch (SQLException e) {
-          log.log(Level.WARNING, "Could not close ostensibly open statement.",
-              e);
+        catch (SQLException sql) {
+          sql.printStackTrace();
         }
       }
 
-      if (c != null) {
+      if (connection != null) {
         try {
-          c.close();
+          connection.close();
         }
-        catch (SQLException e) {
-          log.log(Level.WARNING, "Could not close ostensibly open connection.",
-              e);
+        catch (SQLException sql) {
+          sql.printStackTrace();
+          return;
         }
       }
     }
-
-    return message;
   }
-
-  private static final Logger log = Logger.getAnonymousLogger();
 }
