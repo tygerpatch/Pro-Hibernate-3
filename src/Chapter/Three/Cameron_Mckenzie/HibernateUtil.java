@@ -11,6 +11,9 @@ import Chapter.Four.pojo.Book;
 import Chapter.Four.pojo.ComputerBook;
 import Chapter.Four.pojo.Publisher;
 import Chapter.One.pojo.MessageOfTheDay;
+import Chapter.Seven.pojo.Product;
+import Chapter.Seven.pojo.Software;
+import Chapter.Seven.pojo.Supplier;
 import Chapter.Three.pojo.Advert;
 import Chapter.Three.pojo.Category;
 import Chapter.Three.pojo.Phone;
@@ -65,6 +68,11 @@ public class HibernateUtil {
     config.addAnnotatedClass(Book.class);
     config.addAnnotatedClass(ComputerBook.class);
     config.addAnnotatedClass(Publisher.class);
+
+    // Chapter 7
+    config.addAnnotatedClass(Product.class);
+    config.addAnnotatedClass(Software.class);
+    config.addAnnotatedClass(Supplier.class);
 
     config.configure();
     return config;
