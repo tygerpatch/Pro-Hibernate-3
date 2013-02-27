@@ -27,6 +27,11 @@
     <!-- Chapter 4 : Using Annotations with Hibernate -->
     <mapping class="Chapter.Four.pojo.Author"/>
     <mapping class="Chapter.Four.pojo.Book"/>
+
+    <!-- Chapter 7 : Querying Objects with Criteria -->
+    <mapping resource="com/hibernatebook/criteria/Product.hbm.xml"/>
+    <mapping resource="com/hibernatebook/criteria/Software.hbm.xml"/>
+    <mapping resource="com/hibernatebook/criteria/Supplier.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
 <!--
