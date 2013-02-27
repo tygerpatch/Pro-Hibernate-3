@@ -29,9 +29,9 @@
     <mapping class="Chapter.Four.pojo.Book"/>
 
     <!-- Chapter 7 : Querying Objects with Criteria -->
-    <mapping resource="com/hibernatebook/criteria/Product.hbm.xml"/>
-    <mapping resource="com/hibernatebook/criteria/Software.hbm.xml"/>
-    <mapping resource="com/hibernatebook/criteria/Supplier.hbm.xml"/>
+    <mapping resource="Chapter/Seven/pojo/Product.hbm.xml"/>
+    <mapping resource="Chapter/Seven/pojo/Software.hbm.xml"/>
+    <mapping resource="Chapter/Seven/pojo/Supplier.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
 <!--
