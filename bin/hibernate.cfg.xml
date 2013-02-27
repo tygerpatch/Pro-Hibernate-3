@@ -18,10 +18,14 @@
     <mapping resource="Chapter/One/MessageOfTheDay.hbm.xml" />
 
     <!-- Chapter 3 : Building a Simple Application -->
-    <mapping resource="com\hibernatebook\chapter3\Advert.hbm.xml" />
-    <mapping resource="com\hibernatebook\chapter3\Category.hbm.xml" />
-    <mapping resource="com\hibernatebook\chapter3\Phone.hbm.xml" />
-    <mapping resource="com\hibernatebook\chapter3\User.hbm.xml" />
+    <mapping resource="Chapter/Three/pojo/Advert.hbm.xml" />
+    <mapping resource="Chapter/Three/pojo/Category.hbm.xml" />
+    <mapping resource="Chapter/Three/pojo/Phone.hbm.xml" />
+    <mapping resource="Chapter/Three/pojo/User.hbm.xml" />
+
+    <!-- Chapter 4 : Using Annotations with Hibernate -->
+    <mapping class="Chapter/Four/pojo/Author"/>
+    <mapping class="Chapter/Four/pojo/Book"/>
   </session-factory>
 </hibernate-configuration>
 <!--
