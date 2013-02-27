@@ -12,7 +12,7 @@ public class Phone {
       this.comment = comment;
    }
 
-   Phone() {
+   public Phone() {
    }
 
    private String comment;

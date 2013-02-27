@@ -12,7 +12,7 @@ public class Advert {
       this.user = user;
    }
 
-   Advert() {
+   public Advert() {
    }
 
    private String message;

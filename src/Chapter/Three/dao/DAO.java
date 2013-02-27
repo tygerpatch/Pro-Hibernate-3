@@ -1,11 +1,10 @@
-package com.hibernatebook.chapter3.dao;
+package Chapter.Three.dao;
 
 import java.util.logging.Logger;
 
-
 public class DAO {
-   public DAO() {
-   }
-   
-   public static final Logger log = Logger.getAnonymousLogger();
+  public DAO() {
+  }
+
+  public static final Logger log = Logger.getAnonymousLogger();
 }
