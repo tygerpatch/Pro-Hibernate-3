@@ -269,39 +269,53 @@ public class CriteriaExample {
   //
   // displayProductsList(results);
   // }
-  //
-  // public void executeQBEAdvancedCriteria(Session session) {
-  // Criteria prdCrit = session.createCriteria(Product.class);
-  // Product product = new Product();
-  // product.setName("M%");
-  // Example prdExample = Example.create(product);
-  // prdExample.excludeProperty("price");
-  // prdExample.enableLike();
-  // Criteria suppCrit = prdCrit.createCriteria("supplier");
-  // Supplier supplier = new Supplier();
-  // supplier.setName("SuperCorp");
-  // suppCrit.add(Example.create(supplier));
-  // prdCrit.add(prdExample);
-  // List results = prdCrit.list();
-  //
-  // displayProductsList(results);
-  // }
 
-  // public void displayProductsList(List list) {
-  // Iterator iter = list.iterator();
-  // if (!iter.hasNext()) {
-  // System.out.println("No products to display.");
-  // return;
-  // }
-  // while (iter.hasNext()) {
-  // Product product = (Product) iter.next();
-  // String msg = product.getSupplier().getName() + "\t";
-  // msg += product.getName() + "\t";
-  // msg += product.getPrice() + "\t";
-  // msg += product.getDescription();
-  // System.out.println(msg);
-  // }
-  // }
+  public void executeQBEAdvancedCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+
+    Product product = new Product();
+    product.setName("M%");
+
+    Example productExample = Example.create(product);
+    productExample.excludeProperty("price");
+    productExample.enableLike();
+
+    Supplier supplier = new Supplier();
+    supplier.setName("SuperCorp");
+
+    Criteria productCriteria = session.createCriteria(Product.class);
+    Criteria supplierCriteria = productCriteria.createCriteria("supplier");
+    supplierCriteria.add(Example.create(supplier));
+    productCriteria.add(productExample);
+
+    displayProductsList(productCriteria.list());
+    transaction.commit();
+  }
+
+  public void displayProductsList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No products to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      Product product = (Product) iterator.next();
+
+      StringBuilder stringBuilder = new StringBuilder();
+      stringBuilder.append(product.getSupplier().getName());
+      stringBuilder.append("\t");
+      stringBuilder.append(product.getName());
+      stringBuilder.append("\t");
+      stringBuilder.append(product.getPrice());
+      stringBuilder.append("\t");
+      stringBuilder.append(product.getDescription());
+
+      System.out.println(stringBuilder.toString());
+    }
+  }
 
   // *** Methods that use displaySupplierList
 
@@ -451,11 +465,9 @@ public class CriteriaExample {
     System.out.println("=== Execute Aggregate Criteria ===");
     example.executeAggregatesCriteria();
 
-    // --
+    // -- Methods that use displayProductsList
 
-    // trans.commit();
-    // trans = session.beginTransaction();
-    // example.executeSimpleCriteria(session);
-    // example.executeDistinctCriteria(session);
+    System.out.println("=== Execute QBE Advanced Criteria ===");
+    example.executeQBEAdvancedCriteria();
   }
 }
