@@ -1,6 +1,5 @@
 package Chapter.Three.pojo;
 
-import java.util.HashSet;
 import java.util.Set;
 
 //Title: Pro Hibernate 3
@@ -9,22 +8,21 @@ import java.util.Set;
 //Page 42
 public class Category {
 
-   public Category(String title) {
-      this.title = title;
-      this.adverts = new HashSet();
+   public Category() {
    }
 
-   Category() {
-   }
+   private Set<Advert> adverts;
 
-   private Set adverts;
-
-   public Set getAdverts() {
+   public Set<Advert> getAdverts() {
       return adverts;
    }
 
-   public void setAdverts(Set adverts) {
+   public void setAdverts(Set<Advert> adverts) {
       this.adverts = adverts;
+   }
+
+   public boolean addAdvert(Advert advert) {
+     return adverts.add(advert);
    }
 
    private String title;
