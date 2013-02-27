@@ -4,8 +4,8 @@
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.hibernatebook.criteria">
-   <joined-subclass name="Software" extends="Product">
-      <key column="productId"/>
-      <property name="version" type="string"/>
-   </joined-subclass>
+  <joined-subclass name="Software" extends="Product">
+    <key column="productId" />
+    <property name="version" type="string" />
+  </joined-subclass>
 </hibernate-mapping>
