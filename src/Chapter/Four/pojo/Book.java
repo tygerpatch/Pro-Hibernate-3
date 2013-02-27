@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +16,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.AccessType;
+
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
 //Chapter 4 : Using Annotations with Hibernate
 //Page 68, 77 - 79
 
-@Entity(access = AccessType.PROPERTY)
+@Entity
+@AccessType("property")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Book {
   protected int pages;
@@ -90,5 +92,10 @@ public class Book {
 
   public void setAuthors(Set<Author> authors) {
     this.authors = authors;
+  }
+
+  // Convenience method, added by Todd Gerspacher
+  public boolean addAuthor(Author author) {
+    return authors.add(author);
   }
 }
