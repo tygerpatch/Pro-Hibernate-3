@@ -15,7 +15,7 @@
     <property name="pool_size">5</property>
 
     <!-- Chapter 1 : An Introduction to Hibernate 3 -->
-    <mapping resource="Chapter/One/MessageOfTheDay.hbm.xml" />
+    <mapping resource="Chapter/One/pojo/MessageOfTheDay.hbm.xml" />
 
     <!-- Chapter 3 : Building a Simple Application -->
     <mapping resource="Chapter/Three/pojo/Advert.hbm.xml" />
@@ -24,8 +24,8 @@
     <mapping resource="Chapter/Three/pojo/User.hbm.xml" />
 
     <!-- Chapter 4 : Using Annotations with Hibernate -->
-    <mapping class="Chapter/Four/pojo/Author"/>
-    <mapping class="Chapter/Four/pojo/Book"/>
+    <mapping class="Chapter.Four.pojo.Author"/>
+    <mapping class="Chapter.Four.pojo.Book"/>
   </session-factory>
 </hibernate-configuration>
 <!--
