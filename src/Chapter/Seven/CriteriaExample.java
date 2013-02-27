@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -65,32 +66,35 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayObjectsList(results);
   // }
-  //
-  // public void executeGroupByCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // ProjectionList projList = Projections.projectionList();
-  // projList.add(Projections.groupProperty("name"));
-  // projList.add(Projections.property("price"));
-  // crit.setProjection(projList);
-  // List results = crit.list();
-  // displayObjectsList(results);
-  // }
-  //
-  // public void displayObjectsList(List list) {
-  // Iterator iter = list.iterator();
-  // if (!iter.hasNext()) {
-  // System.out.println("No objects to display.");
-  // return;
-  // }
-  // while (iter.hasNext()) {
-  // System.out.println("New object");
-  // Object[] obj = (Object[]) iter.next();
-  // for (int i = 0; i < obj.length; i++) {
-  // System.out.println(obj[i]);
-  // }
-  //
-  // }
-  // }
+
+  public void executeGroupByCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    ProjectionList projectionList = Projections.projectionList();
+    projectionList.add(Projections.groupProperty("name"));
+    projectionList.add(Projections.property("price"));
+    criteria.setProjection(projectionList);
+    displayObjectsList(criteria.list());
+  }
+
+  private void displayObjectsList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No objects to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      System.out.println("New object");
+      Object[] obj = (Object[]) iterator.next();
+      for (int i = 0; i < obj.length; i++) {
+        System.out.println(obj[i]);
+      }
+
+    }
+  }
 
   // **** Methods that use displayProductsList
 
@@ -451,6 +455,9 @@ public class CriteriaExample {
 
     System.out.println("=== Execute Row Count Criteria ===");
     example.executeRowCountCriteria();
+
+    System.out.println("=== Execute Group By Criteria ===");
+    example.executeGroupByCriteria();
 
     // --
 
