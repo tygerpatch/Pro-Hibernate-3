@@ -17,100 +17,100 @@ import Chapter.Four.pojo.ComputerBook;
 import Chapter.Four.pojo.Publisher;
 
 public class AnnotationsExample {
-
   public static void main(String[] args) {
-    try {
-      AnnotationConfiguration cfg = ExampleConfiguration.getConfig();
-      SchemaExport se = new SchemaExport(cfg);
-      se.create(true, true);
-      SessionFactory sf = cfg.buildSessionFactory();
-      Session session = sf.openSession();
-      Transaction trans = session.beginTransaction();
+    AnnotationConfiguration configuration = new AnnotationConfiguration();
 
-      Publisher pub = new Publisher();
-      pub.setName("Apress");
+    configuration.addAnnotatedClass(Author.class);
+    configuration.addAnnotatedClass(Book.class);
+    configuration.addAnnotatedClass(ComputerBook.class);
+    configuration.addAnnotatedClass(Publisher.class);
 
-      Author jeff = new Author();
-      jeff.setName("Jeff");
-      session.save(jeff);
+    configuration.configure();
 
-      Author dave = new Author();
-      dave.setName("Dave");
-      session.save(dave);
+    SchemaExport schemaExport = new SchemaExport(configuration);
 
-      Book book = new Book();
-      book.setTitle("Pro Hibernate 3 ");
-      book.setPages(200);
-      book.setPublicationDate(new Date());
-      book.getAuthors().add(jeff);
-      book.getAuthors().add(dave);
+    boolean script = true;  // print the DDL to the console
+    boolean export = true;  // export the script to the database
 
-      pub.getBooks().add(book);
+    schemaExport.create(script, export);
 
-      ComputerBook compBook = new ComputerBook();
-      compBook.setTitle("Building Portals with the Java Portlet API");
-      compBook.setPages(350);
-      compBook.setSoftwareName("Apache Pluto");
-      compBook.getAuthors().add(jeff);
-      compBook.getAuthors().add(dave);
+    Author jeff = new Author();
+    jeff.setName("Jeff");
 
-      pub.getBooks().add(compBook);
+    Author dave = new Author();
+    dave.setName("Dave");
 
-      session.save(pub);
+    Book book = new Book();
 
-      jeff.getBooks().add(book);
-      dave.getBooks().add(book);
+    book.setTitle("Pro Hibernate 3 ");
+    book.setPages(200);
+    book.setPublicationDate(new Date());
 
-      jeff.getBooks().add(compBook);
-      dave.getBooks().add(compBook);
+    jeff.addBook(book);
+    book.addAuthor(jeff);
 
-      trans.commit();
+    dave.addBook(book);
+    book.addAuthor(dave);
 
-      displayData(session);
+    ComputerBook computerBook = new ComputerBook();
 
-      session.close();
+    computerBook.setTitle("Building Portals with the Java Portlet API");
+    computerBook.setPages(350);
+    computerBook.setSoftwareName("Apache Pluto");
 
-    }
-    catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+    jeff.addBook(computerBook);
+    computerBook.addAuthor(jeff);
 
-  public static void displayData(Session session) {
-    Transaction trans = session.beginTransaction();
-    Query pubQuery = session.createQuery("from Publisher p");
-    pubQuery.setMaxResults(1);
-    Publisher pub = (Publisher) pubQuery.uniqueResult();
-    trans.commit();
+    dave.addBook(computerBook);
+    computerBook.addAuthor(dave);
 
-    if (pub == null) {
+    Publisher publisher = new Publisher();
+
+    publisher.setName("Apress");
+    publisher.addBook(book);
+    publisher.addBook(computerBook);
+
+    SessionFactory sessionFactory = configuration.buildSessionFactory();
+    Session session = sessionFactory.openSession();
+
+    Transaction transaction = session.beginTransaction();
+
+    session.save(jeff);
+    session.save(dave);
+    session.save(publisher);
+
+    transaction.commit();
+
+    Query query = session.createQuery("FROM Publisher p");
+    query.setMaxResults(1);
+    publisher = (Publisher) query.uniqueResult();
+
+    if (publisher == null) {
       System.out.println("No publishers found");
       return;
     }
-    System.out.println("Publisher name: " + pub.getName());
-    Set<Book> books = pub.getBooks();
-    if (books != null) {
-      Iterator<Book> iter = books.iterator();
-      while (iter.hasNext()) {
-        Book book = iter.next();
-        System.out.println("Title: " + book.getTitle());
 
-        Set<Author> authors = book.getAuthors();
+    System.out.println("Publisher name: " + publisher.getName());
+    Set<Book> books = publisher.getBooks();
+
+    if (books != null) {
+      for(Book _book : books){
+        System.out.println("Title: " + _book.getTitle());
+        Set<Author> authors = _book.getAuthors();
+
         if (authors != null) {
-          Iterator<Author> aIter = authors.iterator();
-          while (aIter.hasNext()) {
-            Author author = aIter.next();
+          for(Author author : authors){
             System.out.println("Author: " + author.getName());
           }
         }
 
-        if (book instanceof ComputerBook) {
-          ComputerBook compBook = (ComputerBook) book;
-          System.out.println("Software: " + compBook.getSoftwareName());
+        if (_book instanceof ComputerBook) {
+          System.out.println("Software: " + ((ComputerBook) _book).getSoftwareName());
         }
       }
     }
 
+    session.close();
   }
 
 }
