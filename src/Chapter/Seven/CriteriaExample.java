@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import Chapter.Seven.pojo.Product;
@@ -306,30 +307,25 @@ public class CriteriaExample {
     Criteria supplierCriteria = session.createCriteria(Supplier.class);
     Criteria productCriteria = supplierCriteria.createCriteria("products");
     productCriteria.add(Restrictions.gt("price", new Double(25.0)));
-    List results = supplierCriteria.list();
-
-    if ((results == null) || (results.isEmpty())) {
-      System.out.println("No suppliers to display.");
-    }
-
-    Supplier supplier;
-
-    for (Object obj : results) {
-      supplier = (Supplier) obj;
-      System.out.println(supplier.getName());
-    }
+    
+    displaySupplierList(supplierCriteria.list());
     transaction.commit();
   }
 
-  // public void executeAssociationsSortingCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Supplier.class);
-  // crit.addOrder(Order.desc("name"));
-  // Criteria prdCrit = crit.createCriteria("products");
-  // prdCrit.add(Restrictions.gt("price", new Double(25.0)));
-  // // prdCrit.addOrder(Order.desc("price"));
-  // List results = prdCrit.list();
-  // displaySupplierList(results);
-  // }
+  public void executeAssociationsSortingCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+
+    Criteria supplierCriteria = session.createCriteria(Supplier.class);
+    supplierCriteria.addOrder(Order.desc("name"));
+
+    Criteria productCriteria = supplierCriteria.createCriteria("products");
+    productCriteria.add(Restrictions.gt("price", new Double(25.0)));
+
+    displaySupplierList(productCriteria.list());
+
+    transaction.commit();
+  }
 
   // public void executeQBECriteria(Session session) {
   // Criteria crit = session.createCriteria(Supplier.class);
@@ -341,18 +337,19 @@ public class CriteriaExample {
   // displaySupplierList(results);
   // }
 
-  // public void displaySupplierList(List list) {
-  // Iterator iter = list.iterator();
-  // if (!iter.hasNext()) {
-  // System.out.println("No suppliers to display.");
-  // return;
-  // }
-  // while (iter.hasNext()) {
-  // Supplier supplier = (Supplier) iter.next();
-  // String msg = supplier.getName();
-  // System.out.println(msg);
-  // }
-  // }
+   private void displaySupplierList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No suppliers to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      Supplier supplier = (Supplier) iterator.next();
+      System.out.println(supplier.getName());
+    }
+   }
 
   // Populate Database
   public void populate() {
@@ -423,6 +420,9 @@ public class CriteriaExample {
 
     System.out.println("=== Execute One-To-Many Associations Criteria ===");
     // example.executeOneToManyAssociationsCriteria(); // BUG: runs, but doesn't produce correct output
+
+    System.out.println("=== Execute Association Sorting Criteria ===");
+    // example.executeAssociationsSortingCriteria();  // BUG: runs, but doesn't produce correct output
 
     // --
 
