@@ -11,11 +11,6 @@ public class MessageOfTheDay implements Serializable {
   public MessageOfTheDay() {
   }
 
-  public MessageOfTheDay(int id, String message) {
-    this.id = id;
-    this.message = message;
-  }
-
   private int id;
 
   public int getId() {
