@@ -45,17 +45,19 @@ public class CriteriaExample {
 
   // *** Methods that use displayObjectsList
 
-  // public void executeAggregatesCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // ProjectionList projList = Projections.projectionList();
-  // projList.add(Projections.max("price"));
-  // projList.add(Projections.min("price"));
-  // projList.add(Projections.avg("price"));
-  // projList.add(Projections.countDistinct("description"));
-  // crit.setProjection(projList);
-  // List results = crit.list();
-  // displayObjectsList(results);
-  // }
+  public void executeAggregatesCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    ProjectionList projectionList = Projections.projectionList();
+    projectionList.add(Projections.max("price"));
+    projectionList.add(Projections.min("price"));
+    projectionList.add(Projections.avg("price"));
+    projectionList.add(Projections.countDistinct("description"));
+    criteria.setProjection(projectionList);
+    displayObjectsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeProjectionCriteria() {
     Session session = HibernateUtil.getSession();
@@ -464,6 +466,9 @@ public class CriteriaExample {
 
     System.out.println("=== Execute Projection Criteria ===");
     example.executeProjectionCriteria();
+
+    System.out.println("=== Execute Aggregate Criteria ===");
+    example.executeAggregatesCriteria();
 
     // --
 
