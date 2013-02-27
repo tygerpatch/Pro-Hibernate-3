@@ -10,8 +10,6 @@ import javax.persistence.InheritanceType;
 //Page 75 & 76
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@InheritanceJoinColumn(name = "BOOK_ID")
 public class ComputerBook extends Book {
   protected String softwareName;
 
