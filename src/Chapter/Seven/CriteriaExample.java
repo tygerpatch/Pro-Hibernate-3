@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -307,7 +308,7 @@ public class CriteriaExample {
     Criteria supplierCriteria = session.createCriteria(Supplier.class);
     Criteria productCriteria = supplierCriteria.createCriteria("products");
     productCriteria.add(Restrictions.gt("price", new Double(25.0)));
-    
+
     displaySupplierList(supplierCriteria.list());
     transaction.commit();
   }
@@ -327,15 +328,18 @@ public class CriteriaExample {
     transaction.commit();
   }
 
-  // public void executeQBECriteria(Session session) {
-  // Criteria crit = session.createCriteria(Supplier.class);
-  // Supplier supplier = new Supplier();
-  // supplier.setName("MegaInc");
-  // crit.add(Example.create(supplier));
-  // List results = crit.list();
-  //
-  // displaySupplierList(results);
-  // }
+  public void executeQBECriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+
+    Supplier supplier = new Supplier();
+    supplier.setName("MegaInc");
+
+    Criteria supplierCriteria = session.createCriteria(Supplier.class);
+    supplierCriteria.add(Example.create(supplier));
+
+   displaySupplierList(supplierCriteria.list());
+  }
 
    private void displaySupplierList(List list) {
     Iterator iterator = list.iterator();
@@ -423,6 +427,9 @@ public class CriteriaExample {
 
     System.out.println("=== Execute Association Sorting Criteria ===");
     // example.executeAssociationsSortingCriteria();  // BUG: runs, but doesn't produce correct output
+
+    System.out.println("=== Execute QBE Criteria ===");
+    // example.executeQBECriteria();  // BUG: runs, but doesn't produce correct output
 
     // --
 
