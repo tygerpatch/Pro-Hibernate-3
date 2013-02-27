@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import Chapter.Seven.pojo.Product;
@@ -16,6 +17,92 @@ import Chapter.Seven.pojo.Supplier;
 import Chapter.Three.Cameron_Mckenzie.HibernateUtil;
 
 public class CriteriaExample {
+  // *** Methods that use displayObjectList
+
+  public void executeRowCountCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.setProjection(Projections.rowCount());
+    displayObjectList(criteria.list());
+    transaction.commit();
+  }
+
+  private void displayObjectList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No objects to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      Object obj = iterator.next();
+      System.out.println(obj);
+    }
+  }
+
+  // *** Methods that use displayObjectsList
+
+  // public void executeAggregatesCriteria(Session session) {
+  // Criteria crit = session.createCriteria(Product.class);
+  // ProjectionList projList = Projections.projectionList();
+  // projList.add(Projections.max("price"));
+  // projList.add(Projections.min("price"));
+  // projList.add(Projections.avg("price"));
+  // projList.add(Projections.countDistinct("description"));
+  // crit.setProjection(projList);
+  // List results = crit.list();
+  // displayObjectsList(results);
+  // }
+  //
+  // public void executeProjectionCriteria(Session session) {
+  // Criteria crit = session.createCriteria(Product.class);
+  // ProjectionList projList = Projections.projectionList();
+  // projList.add(Projections.property("name"));
+  // projList.add(Projections.property("description"));
+  // crit.setProjection(projList);
+  // List results = crit.list();
+  // displayObjectsList(results);
+  // }
+  //
+  // public void executeGroupByCriteria(Session session) {
+  // Criteria crit = session.createCriteria(Product.class);
+  // ProjectionList projList = Projections.projectionList();
+  // projList.add(Projections.groupProperty("name"));
+  // projList.add(Projections.property("price"));
+  // crit.setProjection(projList);
+  // List results = crit.list();
+  // displayObjectsList(results);
+  // }
+  //
+  // public void displayObjectsList(List list) {
+  // Iterator iter = list.iterator();
+  // if (!iter.hasNext()) {
+  // System.out.println("No objects to display.");
+  // return;
+  // }
+  // while (iter.hasNext()) {
+  // System.out.println("New object");
+  // Object[] obj = (Object[]) iter.next();
+  // for (int i = 0; i < obj.length; i++) {
+  // System.out.println(obj[i]);
+  // }
+  //
+  // }
+  // }
+
+  // **** Methods that use displayProductsList
+
+  // public void executeDistinctCriteria(Session session) {
+  // Criteria crit = session.createCriteria(Product.class);
+  // crit.add(Restrictions.gt("price", new Double(25.0)));
+  // crit.add(Restrictions.like("name", "K%"));
+  // crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+  // List results = crit.list();
+  // displayProductsList(results);
+  // }
+
   // public void executeSimpleCriteria(Session session) {
   // Criteria crit = session.createCriteria(Product.class);
   // List results = crit.list();
@@ -190,84 +277,7 @@ public class CriteriaExample {
   //
   // displayProductsList(results);
   // }
-  //
-  // public void executeRowCountCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.setProjection(Projections.rowCount());
-  // List results = crit.list();
-  // displayObjectList(results);
-  // }
-  //
-  // public void executeAggregatesCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // ProjectionList projList = Projections.projectionList();
-  // projList.add(Projections.max("price"));
-  // projList.add(Projections.min("price"));
-  // projList.add(Projections.avg("price"));
-  // projList.add(Projections.countDistinct("description"));
-  // crit.setProjection(projList);
-  // List results = crit.list();
-  // displayObjectsList(results);
-  // }
-  //
-  // public void executeProjectionCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // ProjectionList projList = Projections.projectionList();
-  // projList.add(Projections.property("name"));
-  // projList.add(Projections.property("description"));
-  // crit.setProjection(projList);
-  // List results = crit.list();
-  // displayObjectsList(results);
-  // }
-  //
-  // public void executeGroupByCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // ProjectionList projList = Projections.projectionList();
-  // projList.add(Projections.groupProperty("name"));
-  // projList.add(Projections.property("price"));
-  // crit.setProjection(projList);
-  // List results = crit.list();
-  // displayObjectsList(results);
-  // }
-  //
-  // public void executeDistinctCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.gt("price", new Double(25.0)));
-  // crit.add(Restrictions.like("name", "K%"));
-  // crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
-  //
-  // public void displayObjectList(List list) {
-  // Iterator iter = list.iterator();
-  // if (!iter.hasNext()) {
-  // System.out.println("No objects to display.");
-  // return;
-  // }
-  // while (iter.hasNext()) {
-  // Object obj = iter.next();
-  //
-  // System.out.println(obj);
-  // }
-  // }
-  //
-  // public void displayObjectsList(List list) {
-  // Iterator iter = list.iterator();
-  // if (!iter.hasNext()) {
-  // System.out.println("No objects to display.");
-  // return;
-  // }
-  // while (iter.hasNext()) {
-  // System.out.println("New object");
-  // Object[] obj = (Object[]) iter.next();
-  // for (int i = 0; i < obj.length; i++) {
-  // System.out.println(obj[i]);
-  // }
-  //
-  // }
-  // }
-  //
+
   // public void displayProductsList(List list) {
   // Iterator iter = list.iterator();
   // if (!iter.hasNext()) {
@@ -283,7 +293,9 @@ public class CriteriaExample {
   // System.out.println(msg);
   // }
   // }
-  //
+
+  // ***
+
   // public void displaySoftwareList(List list) {
   // Iterator iter = list.iterator();
   // if (!iter.hasNext()) {
@@ -300,6 +312,8 @@ public class CriteriaExample {
   // System.out.println(msg);
   // }
   // }
+
+  // *** Methods that use displaySupplierList
 
   public void executeOneToManyAssociationsCriteria() {
     Session session = HibernateUtil.getSession();
@@ -324,7 +338,6 @@ public class CriteriaExample {
     productCriteria.add(Restrictions.gt("price", new Double(25.0)));
 
     displaySupplierList(productCriteria.list());
-
     transaction.commit();
   }
 
@@ -338,10 +351,11 @@ public class CriteriaExample {
     Criteria supplierCriteria = session.createCriteria(Supplier.class);
     supplierCriteria.add(Example.create(supplier));
 
-   displaySupplierList(supplierCriteria.list());
+    displaySupplierList(supplierCriteria.list());
+    transaction.commit();
   }
 
-   private void displaySupplierList(List list) {
+  private void displaySupplierList(List list) {
     Iterator iterator = list.iterator();
 
     if (!iterator.hasNext()) {
@@ -353,9 +367,10 @@ public class CriteriaExample {
       Supplier supplier = (Supplier) iterator.next();
       System.out.println(supplier.getName());
     }
-   }
+  }
 
-  // Populate Database
+  // *** Populate the database
+
   public void populate() {
     Supplier supplier = null;
     Product product = null;
@@ -423,13 +438,19 @@ public class CriteriaExample {
     example.populate();
 
     System.out.println("=== Execute One-To-Many Associations Criteria ===");
-    // example.executeOneToManyAssociationsCriteria(); // BUG: runs, but doesn't produce correct output
+    // BUG: runs, but doesn't produce correct output
+    // example.executeOneToManyAssociationsCriteria();
 
     System.out.println("=== Execute Association Sorting Criteria ===");
-    // example.executeAssociationsSortingCriteria();  // BUG: runs, but doesn't produce correct output
+    // BUG: runs, but doesn't produce correct output
+    // example.executeAssociationsSortingCriteria();
 
     System.out.println("=== Execute QBE Criteria ===");
-    // example.executeQBECriteria();  // BUG: runs, but doesn't produce correct output
+    // BUG: runs, but doesn't produce correct output
+    // example.executeQBECriteria();
+
+    System.out.println("=== Execute Row Count Criteria ===");
+    example.executeRowCountCriteria();
 
     // --
 
