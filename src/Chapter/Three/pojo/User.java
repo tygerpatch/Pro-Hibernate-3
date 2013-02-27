@@ -5,16 +5,17 @@ package Chapter.Three.pojo;
 //Chapter 3: Building a Simple Application
 //Page 40
 public class User {
+
    public User(String name, String password) {
       this.name = name;
       this.password = password;
    }
-   
+
    User() {
    }
 
    private String name;   
-   
+
    public String getName() {
       return name;
    }
@@ -24,7 +25,7 @@ public class User {
    }
 
    private String password;
-   
+
    public String getPassword() {
       return password;
    }
@@ -34,7 +35,7 @@ public class User {
    }
 
    private long id;   
-   
+
    protected long getId() {
       return id;
    }

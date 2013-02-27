@@ -4,21 +4,21 @@
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-   <class name="com.hibernatebook.chapter3.Advert" table="advert">
+  <class name="Chapter.Three.pojo.Advert" table="advert">
 
-      <id name="id" type="long" column="id">
-         <generator class="native"/>
-      </id>
+    <id name="id" type="long" column="id">
+      <generator class="native" />
+    </id>
 
-      <property name="message" column="message" type="string"/>
+    <property name="message" column="message" type="string" />
+    <property name="title" column="title" type="string" />
 
-      <property name="title" column="title" type="string"/>
-
-      <many-to-one
-         name="user"
-         column="aduser"
-         class="com.hibernatebook.chapter3.User"
-         not-null="true"/>
-
-   </class>
+    <many-to-one name="user" column="aduser" class="Chapter.Three.pojo.User" not-null="true" />
+  </class>
 </hibernate-mapping>
+<!--
+Title: Pro Hibernate 3
+Authors: Dave Minter, Jeff Linwood
+Chapter 3 : Building a Simple Application
+Page 47
+-->

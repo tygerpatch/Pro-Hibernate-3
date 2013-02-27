@@ -4,18 +4,24 @@
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-   <class name="com.hibernatebook.chapter3.Category" table="category">
+  <class name="Chapter.Three.pojo.Category" table="category">
 
-      <id name="id" type="long" column="id">
-         <generator class="native"/>
-      </id>
+    <id name="id" type="long" column="id">
+      <generator class="native" />
+    </id>
 
-      <property name="title" column="title" type="string" unique="true"/>
+    <property name="title" column="title" type="string" unique="true" />
 
-      <set name="adverts" table="link_category_advert">
-         <key column="id"/>
-         <many-to-many class="com.hibernatebook.chapter3.Advert" column="advert"/>
-      </set>
-      
-   </class>
+    <set name="adverts" table="link_category_advert">
+      <key column="id" />
+      <many-to-many class="Chapter.Three.pojo.Advert" column="advert" />
+    </set>
+
+  </class>
 </hibernate-mapping>
+<!--
+Title: Pro Hibernate 3
+Authors: Dave Minter, Jeff Linwood
+Chapter 3 : Building a Simple Application
+Page 46
+-->

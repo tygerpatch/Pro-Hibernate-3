@@ -3,64 +3,47 @@ package Chapter.Three.pojo;
 import java.util.HashSet;
 import java.util.Set;
 
+//Title: Pro Hibernate 3
+//Authors: Dave Minter, Jeff Linwood
+//Chapter 3: Building a Simple Application
+//Page 42
 public class Category {
+
    public Category(String title) {
       this.title = title;
       this.adverts = new HashSet();
    }
-   
+
    Category() {
    }
 
-   /**
-    * 
-    * @uml.property name="adverts"
-    */
+   private Set adverts;
+
    public Set getAdverts() {
       return adverts;
    }
 
-   /**
-    * 
-    * @uml.property name="adverts"
-    */
    public void setAdverts(Set adverts) {
       this.adverts = adverts;
    }
 
-   /**
-    * 
-    * @uml.property name="title"
-    */
+   private String title;
+
    public String getTitle() {
       return title;
    }
 
-   /**
-    * 
-    * @uml.property name="title"
-    */
    public void setTitle(String title) {
       this.title = title;
    }
 
-   /**
-    * 
-    * @uml.property name="id"
-    */
+   private long id;
+
    protected long getId() {
       return id;
    }
 
-   /**
-    * 
-    * @uml.property name="id"
-    */
    protected void setId(long id) {
       this.id = id;
    }
-
-   private long id;
-   private String title;
-   private Set adverts;
 }

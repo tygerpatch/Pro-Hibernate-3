@@ -24,7 +24,7 @@
     <mapping resource="com\hibernatebook\chapter3\User.hbm.xml" />
   </session-factory>
 </hibernate-configuration>
-<!-- 
+<!--
 Configuration file for...
 Title: Pro Hibernate 3
 Authors: Dave Minter, Jeff Linwood

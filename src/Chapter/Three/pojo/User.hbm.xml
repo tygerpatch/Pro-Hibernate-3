@@ -4,15 +4,19 @@
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-   <class name="com.hibernatebook.chapter3.User" table="aduser">
+  <class name="Chapter.Three.pojo.User" table="aduser">
 
-      <id name="id" type="long" column="id">
-         <generator class="native"/>
-      </id>
+    <id name="id" type="long" column="id">
+      <generator class="native" />
+    </id>
 
-      <property name="name" column="name" type="string" unique="true"/>
-
-      <property name="password" column="password" type="string"/>
-
-   </class>
+    <property name="name" column="name" type="string" unique="true" />
+    <property name="password" column="password" type="string" />
+  </class>
 </hibernate-mapping>
+<!--
+Title: Pro Hibernate 3
+Authors: Dave Minter, Jeff Linwood
+Chapter 3 : Building a Simple Application
+Pages 44 and 45
+-->
