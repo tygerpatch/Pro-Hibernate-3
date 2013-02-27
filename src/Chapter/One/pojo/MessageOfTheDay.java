@@ -1,4 +1,4 @@
-package Chapter.One;
+package Chapter.One.pojo;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
 // pages 4, 5
 public class MessageOfTheDay implements Serializable {
 
-  protected MessageOfTheDay() {
+  public MessageOfTheDay() {
   }
 
   public MessageOfTheDay(int id, String message) {
