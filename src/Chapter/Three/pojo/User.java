@@ -6,11 +6,6 @@ package Chapter.Three.pojo;
 //Page 40
 public class User {
 
-   public User(String name, String password) {
-      this.name = name;
-      this.password = password;
-   }
-
    public User() {
    }
 

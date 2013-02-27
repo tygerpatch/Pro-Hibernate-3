@@ -6,12 +6,6 @@ package Chapter.Three.pojo;
 //Page 43 & 44
 public class Advert {
 
-   public Advert(String title, String message, User user) {
-      this.title = title;
-      this.message = message;
-      this.user = user;
-   }
-
    public Advert() {
    }
 

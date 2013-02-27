@@ -6,12 +6,6 @@ package Chapter.Three.pojo;
 //Page 41 & 41
 public class Phone {
 
-   public Phone(User user, String number, String comment) {
-      this.user = user;
-      this.number = number;
-      this.comment = comment;
-   }
-
    public Phone() {
    }
 
