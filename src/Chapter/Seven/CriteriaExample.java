@@ -248,15 +248,16 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeManyToOneAssociationsCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // Criteria suppCrit = crit.createCriteria("supplier");
-  // suppCrit.add(Restrictions.eq("name", "MegaInc"));
-  // List results = crit.list();
-  //
-  // displayProductsList(results);
-  // }
+
+  public void executeManyToOneAssociationsCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    Criteria supplierCriteria = criteria.createCriteria("supplier");
+    supplierCriteria.add(Restrictions.eq("name", "MegaInc"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeNotNullOrZeroQBECriteria() {
     Session session = HibernateUtil.getSession();
@@ -442,15 +443,15 @@ public class CriteriaExample {
     System.out.println("=== Populate Database ===");
     example.populate();
 
-    System.out.println("=== Execute One-To-Many Associations Criteria ===");
+    // System.out.println("=== Execute One-To-Many Associations Criteria ===");
     // BUG: runs, but doesn't produce correct output
     // example.executeOneToManyAssociationsCriteria();
 
-    System.out.println("=== Execute Association Sorting Criteria ===");
+    // System.out.println("=== Execute Association Sorting Criteria ===");
     // BUG: runs, but doesn't produce correct output
     // example.executeAssociationsSortingCriteria();
 
-    System.out.println("=== Execute QBE Criteria ===");
+    // System.out.println("=== Execute QBE Criteria ===");
     // BUG: runs, but doesn't produce correct output
     // example.executeQBECriteria();
 
@@ -471,7 +472,10 @@ public class CriteriaExample {
     // System.out.println("=== Execute QBE Advanced Criteria ===");
     // example.executeQBEAdvancedCriteria();
 
-    System.out.println("=== Execute Not Null Or Zero QBE Criteria ===");
-    example.executeNotNullOrZeroQBECriteria();
+    // System.out.println("=== Execute Not Null Or Zero QBE Criteria ===");
+    // example.executeNotNullOrZeroQBECriteria();
+
+    System.out.println("=== Execute Many To One Association Criteria ===");
+    example.executeManyToOneAssociationsCriteria();
   }
 }
