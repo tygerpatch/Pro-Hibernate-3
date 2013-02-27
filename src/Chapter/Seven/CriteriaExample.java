@@ -303,25 +303,6 @@ public class CriteriaExample {
   // }
   // }
 
-  // ***
-
-  // public void displaySoftwareList(List list) {
-  // Iterator iter = list.iterator();
-  // if (!iter.hasNext()) {
-  // System.out.println("No software to display.");
-  // return;
-  // }
-  // while (iter.hasNext()) {
-  // Software software = (Software) iter.next();
-  // String msg = software.getSupplier().getName() + "\t";
-  // msg += software.getName() + "\t";
-  // msg += software.getPrice() + "\t";
-  // msg += software.getDescription() + "\t";
-  // msg += software.getVersion();
-  // System.out.println(msg);
-  // }
-  // }
-
   // *** Methods that use displaySupplierList
 
   public void executeOneToManyAssociationsCriteria() {
