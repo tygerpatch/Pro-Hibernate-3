@@ -56,16 +56,18 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayObjectsList(results);
   // }
-  //
-  // public void executeProjectionCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // ProjectionList projList = Projections.projectionList();
-  // projList.add(Projections.property("name"));
-  // projList.add(Projections.property("description"));
-  // crit.setProjection(projList);
-  // List results = crit.list();
-  // displayObjectsList(results);
-  // }
+
+  public void executeProjectionCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    ProjectionList projectionList = Projections.projectionList();
+    projectionList.add(Projections.property("name"));
+    projectionList.add(Projections.property("description"));
+    criteria.setProjection(projectionList);
+    displayObjectsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeGroupByCriteria() {
     Session session = HibernateUtil.getSession();
@@ -76,6 +78,7 @@ public class CriteriaExample {
     projectionList.add(Projections.property("price"));
     criteria.setProjection(projectionList);
     displayObjectsList(criteria.list());
+    transaction.commit();
   }
 
   private void displayObjectsList(List list) {
@@ -458,6 +461,9 @@ public class CriteriaExample {
 
     System.out.println("=== Execute Group By Criteria ===");
     example.executeGroupByCriteria();
+
+    System.out.println("=== Execute Projection Criteria ===");
+    example.executeProjectionCriteria();
 
     // --
 
