@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -25,6 +26,11 @@ public class Publisher {
     this.books = books;
   }
 
+  // Convenience method, added by Todd Gerspacher
+  public boolean addBook(Book book) {
+    return books.add(book);
+  }
+
   protected String name;
 
   public String getName() {
@@ -37,7 +43,8 @@ public class Publisher {
 
   protected int id;
 
-  @Id(generate = GeneratorType.AUTO)
+  @Id
+  @GeneratedValue
   public int getId() {
     return id;
   }
