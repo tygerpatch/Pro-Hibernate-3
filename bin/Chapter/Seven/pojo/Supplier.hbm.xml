@@ -3,7 +3,7 @@
    PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.hibernatebook.criteria">
+<hibernate-mapping package="Chapter.Seven.pojo">
   <class name="Supplier">
     <id name="id" type="int">
       <generator class="native" />
