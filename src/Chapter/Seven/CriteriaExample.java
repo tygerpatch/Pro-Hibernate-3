@@ -1,11 +1,13 @@
 package Chapter.Seven;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
@@ -229,17 +231,17 @@ public class CriteriaExample {
   // results.add(product);
   // displayProductsList(results);
   // }
-  //
-  // public void executeUniqueResultExceptionCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // Criterion price = Restrictions.gt("price", new Double(25.0));
-  // Product product = (Product) crit.uniqueResult();
-  // // test for null here if needed
-  //
-  // List results = new ArrayList();
-  // results.add(product);
-  // displayProductsList(results);
-  // }
+
+  public void executeUniqueResultExceptionCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    Product product = (Product) criteria.uniqueResult();
+    List results = new ArrayList();
+    results.add(product);
+    displayProductsList(results);
+    transaction.commit();
+  }
 
   public void executeOrderCriteria() {
     Session session = HibernateUtil.getSession();
@@ -479,8 +481,12 @@ public class CriteriaExample {
 
     // System.out.println("=== Execute Many To One Association Criteria ===");
     // example.executeManyToOneAssociationsCriteria();
-    
-    System.out.println("=== Execute Order Criteria ===");
-    example.executeOrderCriteria();
+
+    // System.out.println("=== Execute Order Criteria ===");
+    // example.executeOrderCriteria();
+
+    // System.out.println("=== Execute Unique Result Exception Criteria ===");
+    // example.executeUniqueResultExceptionCriteria();
+    // BUG: throws org.hibernate.NonUniqueResultException: query did not return a unique result
   }
 }
