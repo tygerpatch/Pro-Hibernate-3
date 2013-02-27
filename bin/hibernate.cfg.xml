@@ -11,16 +11,25 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
+    <!-- Chapter 3 : Building a Simple Application -->
+    <property name="pool_size">5</property>
+
     <!-- Chapter 1 : An Introduction to Hibernate 3 -->
     <mapping resource="Chapter/One/MessageOfTheDay.hbm.xml" />
+
+    <!-- Chapter 3 : Building a Simple Application -->
+    <mapping resource="com\hibernatebook\chapter3\Advert.hbm.xml" />
+    <mapping resource="com\hibernatebook\chapter3\Category.hbm.xml" />
+    <mapping resource="com\hibernatebook\chapter3\Phone.hbm.xml" />
+    <mapping resource="com\hibernatebook\chapter3\User.hbm.xml" />
   </session-factory>
 </hibernate-configuration>
-<!--
-  Configuration file for...
-  Title: Pro Hibernate 3
-  Authors: Dave Minter, Jeff Linwood
+<!-- 
+Configuration file for...
+Title: Pro Hibernate 3
+Authors: Dave Minter, Jeff Linwood
 
-  Modifications based on...
-  Title: Hibernate Made Easy
-  Author: Cameron McKenzie
+Modifications based on...
+Title: Hibernate Made Easy
+Author: Cameron McKenzie
 -->
