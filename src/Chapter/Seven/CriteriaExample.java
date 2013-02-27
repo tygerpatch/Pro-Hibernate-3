@@ -257,18 +257,19 @@ public class CriteriaExample {
   //
   // displayProductsList(results);
   // }
-  //
-  // public void executeNotNullOrZeroQBECriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // Product exampleProduct = new Product();
-  // exampleProduct.setName("Mouse");
-  // Example example = Example.create(exampleProduct);
-  // example.excludeZeroes();
-  // crit.add(example);
-  // List results = crit.list();
-  //
-  // displayProductsList(results);
-  // }
+
+  public void executeNotNullOrZeroQBECriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    Product product = new Product();
+    product.setName("Mouse");
+    Example example = Example.create(product);
+    example.excludeZeroes();
+    criteria.add(example);
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeQBEAdvancedCriteria() {
     Session session = HibernateUtil.getSession();
@@ -453,21 +454,24 @@ public class CriteriaExample {
     // BUG: runs, but doesn't produce correct output
     // example.executeQBECriteria();
 
-    System.out.println("=== Execute Row Count Criteria ===");
-    example.executeRowCountCriteria();
+    // System.out.println("=== Execute Row Count Criteria ===");
+    // example.executeRowCountCriteria();
 
-    System.out.println("=== Execute Group By Criteria ===");
-    example.executeGroupByCriteria();
+    // System.out.println("=== Execute Group By Criteria ===");
+    // example.executeGroupByCriteria();
 
-    System.out.println("=== Execute Projection Criteria ===");
-    example.executeProjectionCriteria();
+    // System.out.println("=== Execute Projection Criteria ===");
+    // example.executeProjectionCriteria();
 
-    System.out.println("=== Execute Aggregate Criteria ===");
-    example.executeAggregatesCriteria();
+    // System.out.println("=== Execute Aggregate Criteria ===");
+    // example.executeAggregatesCriteria();
 
     // -- Methods that use displayProductsList
 
-    System.out.println("=== Execute QBE Advanced Criteria ===");
-    example.executeQBEAdvancedCriteria();
+    // System.out.println("=== Execute QBE Advanced Criteria ===");
+    // example.executeQBEAdvancedCriteria();
+
+    System.out.println("=== Execute Not Null Or Zero QBE Criteria ===");
+    example.executeNotNullOrZeroQBECriteria();
   }
 }
