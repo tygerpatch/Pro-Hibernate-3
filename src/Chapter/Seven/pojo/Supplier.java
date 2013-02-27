@@ -33,4 +33,8 @@ public class Supplier {
   public void setProducts(List products) {
     this.products = products;
   }
+
+  public boolean addProduct(Product product) {
+    return products.add(product);
+  }
 }
