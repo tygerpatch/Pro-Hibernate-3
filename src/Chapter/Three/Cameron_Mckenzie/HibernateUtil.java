@@ -6,6 +6,11 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
+import Chapter.Four.pojo.Author;
+import Chapter.Four.pojo.Book;
+import Chapter.Four.pojo.ComputerBook;
+import Chapter.Four.pojo.Publisher;
+import Chapter.One.pojo.MessageOfTheDay;
 import Chapter.Three.pojo.Advert;
 import Chapter.Three.pojo.Category;
 import Chapter.Three.pojo.Phone;
@@ -46,10 +51,20 @@ public class HibernateUtil {
     // Future classes we will be creating.
     // Keep them commented out for now.
 
+    // Chapter 1
+    config.addAnnotatedClass(MessageOfTheDay.class);
+
+    // Chapter 3
     config.addAnnotatedClass(Advert.class);
     config.addAnnotatedClass(Category.class);
     config.addAnnotatedClass(Phone.class);
     config.addAnnotatedClass(User.class);
+
+    // Chapter 4
+    config.addAnnotatedClass(Author.class);
+    config.addAnnotatedClass(Book.class);
+    config.addAnnotatedClass(ComputerBook.class);
+    config.addAnnotatedClass(Publisher.class);
 
     config.configure();
     return config;
