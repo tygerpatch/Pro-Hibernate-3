@@ -240,14 +240,16 @@ public class CriteriaExample {
   // results.add(product);
   // displayProductsList(results);
   // }
-  //
-  // public void executeOrderCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.gt("price", new Double(25.0)));
-  // crit.addOrder(Order.desc("price"));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeOrderCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.gt("price", new Double(25.0)));
+    criteria.addOrder(Order.desc("price"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeManyToOneAssociationsCriteria() {
     Session session = HibernateUtil.getSession();
@@ -475,7 +477,10 @@ public class CriteriaExample {
     // System.out.println("=== Execute Not Null Or Zero QBE Criteria ===");
     // example.executeNotNullOrZeroQBECriteria();
 
-    System.out.println("=== Execute Many To One Association Criteria ===");
-    example.executeManyToOneAssociationsCriteria();
+    // System.out.println("=== Execute Many To One Association Criteria ===");
+    // example.executeManyToOneAssociationsCriteria();
+    
+    System.out.println("=== Execute Order Criteria ===");
+    example.executeOrderCriteria();
   }
 }
