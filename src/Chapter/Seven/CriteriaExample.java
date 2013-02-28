@@ -151,13 +151,15 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeNullCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.isNull("name"));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeNullCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.isNull("name"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeGreaterThanCriteria() {
     Session session = HibernateUtil.getSession();
@@ -531,8 +533,11 @@ public class CriteriaExample {
     // System.out.println("=== Execute And Criteria ===");
     // example.executeAndCriteria();
 
-    System.out.println("=== Execute Greater-Than Criteria ===");
-    example.executeGreaterThanCriteria();
+    // System.out.println("=== Execute Greater-Than Criteria ===");
+    // example.executeGreaterThanCriteria();
+
+    System.out.println("=== Execute Null Criteria ===");
+    example.executeNullCriteria();
     // stuff
 
     // System.out.println("=== Execute Distinct Criteria ===");
