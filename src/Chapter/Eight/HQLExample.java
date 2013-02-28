@@ -204,29 +204,31 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeOrderTwoPropertiesHQL(Session session) {
-//String hql = "from Product p order by p.supplier.name asc, p.price asc";
-//Query query = session.createQuery(hql);
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executeOrderTwoPropertiesHQL(Session session) {
+    String hql = "from Product p order by p.supplier.name asc, p.price asc";
+    Query query = session.createQuery(hql);
+    List results = query.list();
+    displayProductsList(results);
+  }
 
-//  public void displayProductsList(List list) {
-//    Iterator iter = list.iterator();
-//    if (!iter.hasNext()) {
-//      System.out.println("No products to display.");
-//      return;
-//    }
-//    while (iter.hasNext()) {
-//      Product product = (Product) iter.next();
-//      String msg = product.getSupplier().getName() + "\t";
-//      msg += product.getName() + "\t";
-//      msg += product.getPrice() + "\t";
-//      msg += product.getDescription();
-//      System.out.println(msg);
-//    }
-//  }
-  
+  private void displayProductsList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No products to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      Product product = (Product) iterator.next();
+      String msg = product.getSupplier().getName() + "\t";
+      msg += product.getName() + "\t";
+      msg += product.getPrice() + "\t";
+      msg += product.getDescription();
+      System.out.println(msg);
+    }
+  }
+
   // *** Methods that use displaySupplierList
 
   public void executeFetchAssociationsHQL() {
@@ -350,7 +352,7 @@ public class HQLExample {
     //System.out.println("=== Execute Select SQL ===");
     //example.executeSelectSQL();
 
-    System.out.println("=== Execute Fetch Association HQL ===");
-    example.executeFetchAssociationsHQL();
+    //System.out.println("=== Execute Fetch Association HQL ===");
+    //example.executeFetchAssociationsHQL();
   }
 }
