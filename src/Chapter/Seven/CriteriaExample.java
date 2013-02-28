@@ -119,11 +119,13 @@ public class CriteriaExample {
     transaction.commit();
   }
 
-  // public void executeSimpleCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+  public void executeSimpleCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeEqualsCriteria() {
     Session session = HibernateUtil.getSession();
@@ -557,9 +559,11 @@ public class CriteriaExample {
     // System.out.println("=== Execute Not-Equals Criteria ===");
     // example.executeNotEqualsCriteria();
 
-    System.out.println("=== Execute Equals Criteria ===");
-    example.executeEqualsCriteria();
-    // stuff
+    // System.out.println("=== Execute Equals Criteria ===");
+    // example.executeEqualsCriteria();
+
+    System.out.println("=== Execute Simple Criteria ===");
+    example.executeSimpleCriteria();
 
     // System.out.println("=== Execute Distinct Criteria ===");
     // example.executeDistinctCriteria();
