@@ -197,12 +197,14 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeOrderHQL(Session session) {
-//String hql = "from Product p where p.price>25.0 order by p.price desc";
-//Query query = session.createQuery(hql);
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executeOrderHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "from Product p where p.price>25.0 order by p.price desc";
+    Query query = session.createQuery(hql);
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeOrderTwoPropertiesHQL() {
     Session session = HibernateUtil.getSession();
@@ -358,7 +360,10 @@ public class HQLExample {
     //example.executeFetchAssociationsHQL();
 
     // *** Methods that use displayProductsList
-    System.out.println("=== Execute Order Two Properties HQL ===");
-    example.executeOrderTwoPropertiesHQL();
+    //System.out.println("=== Execute Order Two Properties HQL ===");
+    //example.executeOrderTwoPropertiesHQL();
+
+    System.out.println("=== Execute Order HQL ===");
+    example.executeOrderHQL();
   }
 }
