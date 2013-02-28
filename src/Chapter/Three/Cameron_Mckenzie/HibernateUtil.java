@@ -10,7 +10,6 @@ import Chapter.Four.pojo.Author;
 import Chapter.Four.pojo.Book;
 import Chapter.Four.pojo.ComputerBook;
 import Chapter.Four.pojo.Publisher;
-import Chapter.One.pojo.MessageOfTheDay;
 import Chapter.Seven.pojo.Product;
 import Chapter.Seven.pojo.Software;
 import Chapter.Seven.pojo.Supplier;
@@ -18,6 +17,7 @@ import Chapter.Three.pojo.Advert;
 import Chapter.Three.pojo.Category;
 import Chapter.Three.pojo.Phone;
 import Chapter.Three.pojo.User;
+import Plain_Old_Java_Objects.MessageOfTheDay;
 
 // Title: Hibernate Made Easy
 // Author: Cameron McKenzie

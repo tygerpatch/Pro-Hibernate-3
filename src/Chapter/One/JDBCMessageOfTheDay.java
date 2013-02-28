@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Chapter.One.pojo.MessageOfTheDay;
+import Plain_Old_Java_Objects.MessageOfTheDay;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
@@ -19,6 +19,9 @@ import Chapter.One.pojo.MessageOfTheDay;
 public class JDBCMessageOfTheDay {
 
   public static void main(String[] args) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
     }
@@ -35,8 +38,6 @@ public class JDBCMessageOfTheDay {
       return;
     }
 
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
 
     try {
       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_jdbc", "root", "password");
