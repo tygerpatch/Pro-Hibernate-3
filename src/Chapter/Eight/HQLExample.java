@@ -117,12 +117,13 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeFullyQualifiedHQL(Session session) {
-//Query query = session
-//    .createQuery("from com.hibernatebook.criteria.Product");
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executeFullyQualifiedHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Query query = session.createQuery("from com.hibernatebook.criteria.Product");
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeDeleteHQL() {
     Session session = HibernateUtil.getSession();
@@ -394,7 +395,11 @@ public class HQLExample {
     //System.out.println("=== Execute Criteria for Restrictions ===");
     //example.executeCriteriaForRestrictions();
 
-    System.out.println("=== Execute Delete HQL ===");
-    example.executeDeleteHQL();
+    //System.out.println("=== Execute Delete HQL ===");
+    //example.executeDeleteHQL();
+
+    //System.out.println("=== Execute Fully Qualified HQL ===");
+    //example.executeFullyQualifiedHQL();
+    // BUG: throws  org.hibernate.hql.internal.ast.QuerySyntaxException: com.hibernatebook.criteria.Product is not mapped [from com.hibernatebook.criteria.Product]
   }
 }
