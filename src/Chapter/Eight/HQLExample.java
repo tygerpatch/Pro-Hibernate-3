@@ -150,12 +150,14 @@ public class HQLExample {
 //
 //}
 
-//public void executeHQLForRestrictions(Session session) {
-//String hql = "from Product where price > 25.0 and name like 'Mou%'";
-//Query query = session.createQuery(hql);
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executeHQLForRestrictions() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "from Product where price > 25.0 and name like 'Mou%'";
+    Query query = session.createQuery(hql);
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeNamedParametersHQL() {
     Session session = HibernateUtil.getSession();
@@ -382,7 +384,10 @@ public class HQLExample {
     //System.out.println("=== Execute Object Named Paramters HQL ===");
     //example.executeObjectNamedParametersHQL();
 
-    System.out.println("=== Execute Named Parameters HQL ===");
-    example.executeNamedParametersHQL();
+    //System.out.println("=== Execute Named Parameters HQL ===");
+    //example.executeNamedParametersHQL();
+
+    System.out.println("=== Execute HQL for Restrictions ===");
+    example.executeHQLForRestrictions();
   }
 }
