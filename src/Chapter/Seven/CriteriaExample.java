@@ -525,7 +525,7 @@ public class CriteriaExample {
     example.executeOrCriteria();
     // stuff
 
-    System.out.println("=== Execute Distinct Criteria ===");
-    example.executeDistinctCriteria();
+    //System.out.println("=== Execute Distinct Criteria ===");
+    //example.executeDistinctCriteria();
   }
 }
