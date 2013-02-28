@@ -21,11 +21,6 @@ import Chapter.Three.Cameron_Mckenzie.HibernateUtil;
 
 public class HQLExample {
 
-//  public void executeSimpleHQL(Session session) {
-//    Query query = session.createQuery("from Product");
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
 //
 //  public void executeCommentedHQL(Session session) {
 //    String hql = "from Supplier";
@@ -34,121 +29,9 @@ public class HQLExample {
 //    List results = query.list();
 //  }
 //
-//  public void executeFullyQualifiedHQL(Session session) {
-//    Query query = session
-//        .createQuery("from com.hibernatebook.criteria.Product");
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
 //
-//  public void executeProjectionHQL(Session session) {
-//    Query query = session
-//        .createQuery("select product.name, product.price from Product product");
-//    List results = query.list();
-//    displayObjectsList(results);
-//  }
-//
-//  public void executeCriteriaForRestrictions(Session session) {
-//    Criteria crit = session.createCriteria(Product.class);
-//    Criterion price = Restrictions.gt("price", new Double(25.0));
-//    Criterion name = Restrictions.like("name", "Mou%");
-//    LogicalExpression orExp = Restrictions.or(price, name);
-//    crit.add(orExp);
-//    crit.add(Restrictions.ilike("description", "blocks%"));
-//    List results = crit.list();
-//    displayProductsList(results);
-//
-//  }
-//
-//  public void executeHQLForRestrictions(Session session) {
-//    String hql = "from Product where price > 25.0 and name like 'Mou%'";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
-//
-//  public void executeNamedParametersHQL(Session session) {
-//    String hql = "from Product where price > :price";
-//    Query query = session.createQuery(hql);
-//    query.setDouble("price", 25.0);
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
-//
-//  public void executeObjectNamedParametersHQL(Session session) {
-//    String supplierHQL = "from Supplier where name='MegaInc'";
-//    Query supplierQuery = session.createQuery(supplierHQL);
-//    Supplier supplier = (Supplier) supplierQuery.list().get(0);
-//
-//    String hql = "from Product as product where product.supplier=:supplier";
-//    Query query = session.createQuery(hql);
-//    query.setEntity("supplier", supplier);
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
-//
-//  public void executePagingHQL(Session session) {
-//    Query query = session.createQuery("from Product");
-//    query.setFirstResult(1);
-//    query.setMaxResults(2);
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
-//
-//  public void executeUniqueResultHQL(Session session) {
-//    String hql = "from Product where price>25.0";
-//    Query query = session.createQuery(hql);
-//    query.setMaxResults(1);
-//    Product product = (Product) query.uniqueResult();
-//    // test for null here if needed
-//
-//    List results = new ArrayList();
-//    results.add(product);
-//    displayProductsList(results);
-//  }
-//
-//  public void executeOrderHQL(Session session) {
-//    String hql = "from Product p where p.price>25.0 order by p.price desc";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
-//
-//  public void executeOrderTwoPropertiesHQL(Session session) {
-//    String hql = "from Product p order by p.supplier.name asc, p.price asc";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displayProductsList(results);
-//  }
-//
-//  public void executeAssociationsHQL(Session session) {
-//    String hql = "select s.name, p.name, p.price from Product p inner join p.supplier as s";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displayObjectsList(results);
-//  }
-//
-//  public void executeAssociationObjectsHQL(Session session) {
-//    String hql = "from Product p inner join p.supplier as s";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displayObjectsList(results);
-//  }
-//
-//  public void executeFetchAssociationsHQL(Session session) {
-//    String hql = "from Supplier s inner join fetch s.products as p";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displaySupplierList(results);
-//  }
-//
-//  public void executeCountHQL(Session session) {
-//    String hql = "select min(product.price), max(product.price) from Product product";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//    displayObjectsList(results);
-//  }
-//
+
+
 //  public void executeNamedQuery(Session session) {
 //
 //    Query query = session
@@ -171,46 +54,8 @@ public class HQLExample {
 //    displayObjectList(results);
 //
 //  }
-//
-//  public void executeSelectSQL(Session session) {
-//    String sql = "select {supplier.*} from Supplier supplier";
-//
-//    SQLQuery query = session.createSQLQuery(sql);
-//    query.addEntity("supplier", Supplier.class);
-//    List results = query.list();
-//    displaySupplierList(results);
-//
-//  }
-//
-//  public void executeUpdateHQL(Session session) {
-//    String hql = "update Supplier set name = :newName where name = :name";
-//    Query query = session.createQuery(hql);
-//    query.setString("name", "SuperCorp");
-//    query.setString("newName", "MegaCorp");
-//    int rowCount = query.executeUpdate();
-//    System.out.println("Rows affected: " + rowCount);
-//
-//    // See the results of the update
-//    query = session.createQuery("from Supplier");
-//    List results = query.list();
-//
-//    displaySupplierList(results);
-//  }
-//
-//  public void executeDeleteHQL(Session session) {
-//    String hql = "delete from Product where name = :name";
-//    Query query = session.createQuery(hql);
-//    query.setString("name", "Mouse");
-//    int rowCount = query.executeUpdate();
-//    System.out.println("Rows affected: " + rowCount);
-//
-//    // See the results of the update
-//    query = session.createQuery("from Product");
-//    List results = query.list();
-//
-//    displayProductsList(results);
-//  }
-//
+
+
 //
 //  public void displayObjectList(List list) {
 //    Iterator iter = list.iterator();
@@ -224,7 +69,39 @@ public class HQLExample {
 //      System.out.println(obj);
 //    }
 //  }
-//
+  
+  
+  // *** Methods that use displayObjectsList
+
+//public void executeProjectionHQL(Session session) {
+//Query query = session
+//    .createQuery("select product.name, product.price from Product product");
+//List results = query.list();
+//displayObjectsList(results);
+//}
+
+//public void executeAssociationsHQL(Session session) {
+//String hql = "select s.name, p.name, p.price from Product p inner join p.supplier as s";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displayObjectsList(results);
+//}
+
+//public void executeAssociationObjectsHQL(Session session) {
+//String hql = "from Product p inner join p.supplier as s";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displayObjectsList(results);
+//}
+
+//public void executeCountHQL(Session session) {
+//String hql = "select min(product.price), max(product.price) from Product product";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displayObjectsList(results);
+//}
+
+  
 //  public void displayObjectsList(List list) {
 //    Iterator iter = list.iterator();
 //    if (!iter.hasNext()) {
@@ -240,7 +117,110 @@ public class HQLExample {
 //
 //    }
 //  }
+  
+  
+  // *** Methods that use displayProductsList
+  
+//public void executeSimpleHQL(Session session) {
+//Query query = session.createQuery("from Product");
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executeFullyQualifiedHQL(Session session) {
+//Query query = session
+//    .createQuery("from com.hibernatebook.criteria.Product");
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executeDeleteHQL(Session session) {
+//String hql = "delete from Product where name = :name";
+//Query query = session.createQuery(hql);
+//query.setString("name", "Mouse");
+//int rowCount = query.executeUpdate();
+//System.out.println("Rows affected: " + rowCount);
 //
+//// See the results of the update
+//query = session.createQuery("from Product");
+//List results = query.list();
+//
+//displayProductsList(results);
+//}
+
+//public void executeCriteriaForRestrictions(Session session) {
+//Criteria crit = session.createCriteria(Product.class);
+//Criterion price = Restrictions.gt("price", new Double(25.0));
+//Criterion name = Restrictions.like("name", "Mou%");
+//LogicalExpression orExp = Restrictions.or(price, name);
+//crit.add(orExp);
+//crit.add(Restrictions.ilike("description", "blocks%"));
+//List results = crit.list();
+//displayProductsList(results);
+//
+//}
+
+//public void executeHQLForRestrictions(Session session) {
+//String hql = "from Product where price > 25.0 and name like 'Mou%'";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executeNamedParametersHQL(Session session) {
+//String hql = "from Product where price > :price";
+//Query query = session.createQuery(hql);
+//query.setDouble("price", 25.0);
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executeObjectNamedParametersHQL(Session session) {
+//String supplierHQL = "from Supplier where name='MegaInc'";
+//Query supplierQuery = session.createQuery(supplierHQL);
+//Supplier supplier = (Supplier) supplierQuery.list().get(0);
+//
+//String hql = "from Product as product where product.supplier=:supplier";
+//Query query = session.createQuery(hql);
+//query.setEntity("supplier", supplier);
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executePagingHQL(Session session) {
+//Query query = session.createQuery("from Product");
+//query.setFirstResult(1);
+//query.setMaxResults(2);
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executeUniqueResultHQL(Session session) {
+//String hql = "from Product where price>25.0";
+//Query query = session.createQuery(hql);
+//query.setMaxResults(1);
+//Product product = (Product) query.uniqueResult();
+//// test for null here if needed
+//
+//List results = new ArrayList();
+//results.add(product);
+//displayProductsList(results);
+//}
+
+//public void executeOrderHQL(Session session) {
+//String hql = "from Product p where p.price>25.0 order by p.price desc";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displayProductsList(results);
+//}
+
+//public void executeOrderTwoPropertiesHQL(Session session) {
+//String hql = "from Product p order by p.supplier.name asc, p.price asc";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displayProductsList(results);
+//}
+
 //  public void displayProductsList(List list) {
 //    Iterator iter = list.iterator();
 //    if (!iter.hasNext()) {
@@ -256,7 +236,9 @@ public class HQLExample {
 //      System.out.println(msg);
 //    }
 //  }
-//
+
+  // ===
+  
 //  public void displaySoftwareList(List list) {
 //    Iterator iter = list.iterator();
 //    if (!iter.hasNext()) {
@@ -274,6 +256,41 @@ public class HQLExample {
 //    }
 //  }
 //
+  
+  // *** Methods that use displaySupplierList
+
+//public void executeFetchAssociationsHQL(Session session) {
+//String hql = "from Supplier s inner join fetch s.products as p";
+//Query query = session.createQuery(hql);
+//List results = query.list();
+//displaySupplierList(results);
+//}
+
+//public void executeSelectSQL(Session session) {
+//String sql = "select {supplier.*} from Supplier supplier";
+//
+//SQLQuery query = session.createSQLQuery(sql);
+//query.addEntity("supplier", Supplier.class);
+//List results = query.list();
+//displaySupplierList(results);
+//
+//}
+
+//public void executeUpdateHQL(Session session) {
+//String hql = "update Supplier set name = :newName where name = :name";
+//Query query = session.createQuery(hql);
+//query.setString("name", "SuperCorp");
+//query.setString("newName", "MegaCorp");
+//int rowCount = query.executeUpdate();
+//System.out.println("Rows affected: " + rowCount);
+//
+//// See the results of the update
+//query = session.createQuery("from Supplier");
+//List results = query.list();
+//
+//displaySupplierList(results);
+//}
+
 //  public void displaySupplierList(List list) {
 //    Iterator iter = list.iterator();
 //    if (!iter.hasNext()) {
@@ -353,16 +370,6 @@ public class HQLExample {
     System.out.println("=== Populate Database ===");
     example.populate();
 
-//    Session session = HibernateHelper.getSession();
-//    Transaction trans = session.beginTransaction();
-//
-//    // example.populate(session);
-//    // trans.commit();
-//    // trans = session.beginTransaction();
-//
-//    example.executeDeleteHQL(session);
-//
-//    trans.commit();
-//    session.close();
+    // *** Methods that use displaySupplierList
   }
 }
