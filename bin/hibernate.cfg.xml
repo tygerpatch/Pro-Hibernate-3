@@ -50,6 +50,9 @@
     <!-- Chapter 11 : Events and Interceptors -->
     <mapping resource="com/hibernatebook/chapter10/events/Booking.hbm.xml"/>
     <mapping resource="com/hibernatebook/chapter10/events/TestEntity.hbm.xml"/>
+
+    <!--  Chapter 12 : Hibernate Filters -->
+    <mapping resource="com/hibernatebook/filters/User.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
 <!--
