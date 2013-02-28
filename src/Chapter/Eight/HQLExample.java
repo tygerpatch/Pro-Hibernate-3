@@ -185,17 +185,19 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeUniqueResultHQL(Session session) {
-//String hql = "from Product where price>25.0";
-//Query query = session.createQuery(hql);
-//query.setMaxResults(1);
-//Product product = (Product) query.uniqueResult();
-//// test for null here if needed
-//
-//List results = new ArrayList();
-//results.add(product);
-//displayProductsList(results);
-//}
+  public void executeUniqueResultHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "from Product where price>25.0";
+    Query query = session.createQuery(hql);
+    query.setMaxResults(1);
+    Product product = (Product) query.uniqueResult();
+    // test for null here if needed
+    List results = new ArrayList();
+    results.add(product);
+    displayProductsList(results);
+    transaction.commit();
+  }
 
   public void executeOrderHQL() {
     Session session = HibernateUtil.getSession();
@@ -363,7 +365,10 @@ public class HQLExample {
     //System.out.println("=== Execute Order Two Properties HQL ===");
     //example.executeOrderTwoPropertiesHQL();
 
-    System.out.println("=== Execute Order HQL ===");
-    example.executeOrderHQL();
+    //System.out.println("=== Execute Order HQL ===");
+    //example.executeOrderHQL();
+
+    System.out.println("=== Execute Unique Result HQL ===");
+    example.executeUniqueResultHQL();
   }
 }
