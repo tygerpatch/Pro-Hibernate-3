@@ -204,13 +204,15 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeSQLCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.sqlRestriction("{alias}.name like 'Mou%'"));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeSQLCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.sqlRestriction("{alias}.name like 'Mou%'"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executePagingCriteria() {
     Session session = HibernateUtil.getSession();
@@ -303,7 +305,7 @@ public class CriteriaExample {
     transaction.commit();
   }
 
-  public void displayProductsList(List list) {
+  private void displayProductsList(List list) {
     Iterator iterator = list.iterator();
 
     if (!iterator.hasNext()) {
@@ -491,12 +493,16 @@ public class CriteriaExample {
 
     // System.out.println("=== Execute Non-Unique Result Exception Criteria ===");
     // example.executeUniqueResultExceptionCriteria();
-    // BUG: throws org.hibernate.NonUniqueResultException: query did not return a unique result
+    // BUG: throws org.hibernate.NonUniqueResultException: query did not return
+    // a unique result
 
-    //System.out.println("=== Execute Unique Result Exception Criteria ===");
-    //example.executeUniqueResultCriteria();
+    // System.out.println("=== Execute Unique Result Exception Criteria ===");
+    // example.executeUniqueResultCriteria();
 
-    System.out.println("=== Execute Paging Criteria ===");
-    example.executePagingCriteria();
+    // System.out.println("=== Execute Paging Criteria ===");
+    // example.executePagingCriteria();
+
+    System.out.println("=== Execute SQL Criteria ===");
+    example.executeSQLCriteria();
   }
 }
