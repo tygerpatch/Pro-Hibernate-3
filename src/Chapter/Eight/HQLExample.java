@@ -14,9 +14,9 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 
-import Chapter.Eight.pojo.Product;
-import Chapter.Eight.pojo.Software;
-import Chapter.Eight.pojo.Supplier;
+import Chapter.Seven.pojo.Product;
+import Chapter.Seven.pojo.Software;
+import Chapter.Seven.pojo.Supplier;
 
 public class HQLExample {
 
