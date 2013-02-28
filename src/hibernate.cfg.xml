@@ -32,6 +32,12 @@
     <mapping resource="Chapter/Seven/pojo/Product.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Software.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Supplier.hbm.xml"/>
+
+    <!--  Chapter 8 : Querying with HQL and SQL -->
+    <mapping resource="com/hibernatebook/criteria/Product.hbm.xml" />
+    <mapping resource="com/hibernatebook/criteria/Software.hbm.xml" />
+    <mapping resource="com/hibernatebook/criteria/Supplier.hbm.xml" />
+
   </session-factory>
 </hibernate-configuration>
 <!--
