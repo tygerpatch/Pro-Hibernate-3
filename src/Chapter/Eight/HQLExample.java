@@ -210,66 +210,6 @@ public class HQLExample {
     displayProductsList(results);
   }
 
-  /*
-   * public void executeEqualsCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class);
-   * crit.add(Restrictions.eq("name","Mouse")); List results = crit.list();
-   * displayProductsList(results); }
-   * 
-   * public void executeNotEqualsCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class);
-   * crit.add(Restrictions.ne("name","Mouse")); List results = crit.list();
-   * displayProductsList(results); }
-   * 
-   * public void executeLikePatternCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class);
-   * crit.add(Restrictions.like("name","Mou%")); List results = crit.list();
-   * displayProductsList(results); }
-   * 
-   * public void executeILikeMatchModeCriteria(Session session) { Criteria crit
-   * = session.createCriteria(Product.class);
-   * crit.add(Restrictions.ilike("name","browser", MatchMode.END)); List results
-   * = crit.list(); displayProductsList(results); }
-   * 
-   * public void executeNullCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class);
-   * crit.add(Restrictions.isNull("name")); List results = crit.list();
-   * displayProductsList(results); }
-   * 
-   * public void executeGreaterThanCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class); crit.add(Restrictions.gt("price",new
-   * Double(25.0))); List results = crit.list(); displayProductsList(results); }
-   * 
-   * public void executeAndCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class); crit.add(Restrictions.gt("price",new
-   * Double(25.0))); crit.add(Restrictions.like("name","K%")); List results =
-   * crit.list(); displayProductsList(results); }
-   * 
-   * public void executeOrCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class); Criterion price =
-   * Restrictions.gt("price",new Double(25.0)); Criterion name =
-   * Restrictions.like("name","Mou%"); LogicalExpression orExp =
-   * Restrictions.or(price,name); crit.add(orExp); List results = crit.list();
-   * displayProductsList(results); }
-   * 
-   * public void executeAndOrCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class); Criterion price =
-   * Restrictions.gt("price",new Double(25.0)); Criterion name =
-   * Restrictions.like("name","Mou%"); LogicalExpression orExp =
-   * Restrictions.or(price,name); crit.add(orExp);
-   * crit.add(Restrictions.ilike("description","blocks%")); List results =
-   * crit.list(); displayProductsList(results); }
-   * 
-   * 
-   * 
-   * 
-   * public void executeGroupByCriteria(Session session) { Criteria crit =
-   * session.createCriteria(Product.class); ProjectionList projList =
-   * Projections.projectionList();
-   * projList.add(Projections.groupProperty("name"));
-   * projList.add(Projections.property("price")); crit.setProjection(projList);
-   * List results = crit.list(); displayObjectsList(results); }
-   */
   public void populate(Session session) {
 
     Supplier superCorp = new Supplier();
