@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
@@ -190,20 +191,22 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeDisjunctionCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // Criterion price = Restrictions.gt("price", new Double(25.0));
-  // Criterion name = Restrictions.like("name", "Mou%");
-  // Criterion desc = Restrictions.ilike("description", "blocks%");
-  // Disjunction disjunction = Restrictions.disjunction();
-  // disjunction.add(price);
-  // disjunction.add(name);
-  // disjunction.add(desc);
-  // crit.add(disjunction);
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeDisjunctionCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Disjunction disjunction = Restrictions.disjunction();
+    Criterion price = Restrictions.gt("price", new Double(25.0));
+    disjunction.add(price);
+    Criterion name = Restrictions.like("name", "Mou%");
+    disjunction.add(name);
+    Criterion description = Restrictions.ilike("description", "blocks%");
+    disjunction.add(description);
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(disjunction);
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeSQLCriteria() {
     Session session = HibernateUtil.getSession();
@@ -502,7 +505,10 @@ public class CriteriaExample {
     // System.out.println("=== Execute Paging Criteria ===");
     // example.executePagingCriteria();
 
-    System.out.println("=== Execute SQL Criteria ===");
-    example.executeSQLCriteria();
+    // System.out.println("=== Execute SQL Criteria ===");
+    // example.executeSQLCriteria();
+
+    System.out.println("=== Execute Disjunction Criteria ===");
+    example.executeDisjunctionCriteria();
   }
 }
