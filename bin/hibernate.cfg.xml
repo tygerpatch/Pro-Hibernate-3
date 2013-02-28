@@ -33,6 +33,10 @@
     <mapping resource="Chapter/Seven/pojo/Product.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Software.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Supplier.hbm.xml"/>
+    
+    <!-- Chapter 9 : Using the Session -->
+    <mapping resource="com/hibernatebook/chapter09/deadlock/Publisher.hbm.xml"/>
+    <mapping resource="com/hibernatebook/chapter09/deadlock/Subscriber.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
 <!--

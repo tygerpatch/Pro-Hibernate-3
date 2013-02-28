@@ -429,6 +429,5 @@ public class HQLExample {
 
     System.out.println("=== Execute Named Query ===");
     example.executeNamedQuery();
-    // throws  org.hibernate.MappingException: Named query not known: com.hibernatebook.criteria.Product.HQLpricing
   }
 }
