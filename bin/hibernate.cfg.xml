@@ -53,6 +53,12 @@
 
     <!--  Chapter 12 : Hibernate Filters -->
     <mapping resource="com/hibernatebook/filters/User.hbm.xml"/>
+
+    <!--  Chapter 13 : Fitting Hibernate into the Existing Environment -->
+    <mapping resource="com/hibernatebook/legacy/Color.hbm.xml"/>
+    <mapping resource="com/hibernatebook/legacy/ProductData.hbm.xml"/>
+    <mapping resource="com/hibernatebook/legacy/Product.hbm.xml"/>
+    <mapping resource="com/hibernatebook/legacy/Client.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
 <!--
