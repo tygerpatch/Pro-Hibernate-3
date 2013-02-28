@@ -1,10 +1,10 @@
-package Chapter.One;
+package MessageOfTheDay;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import Plain_Old_Java_Objects.MessageOfTheDay;
 
@@ -19,9 +19,6 @@ import Plain_Old_Java_Objects.MessageOfTheDay;
 public class JDBCMessageOfTheDay {
 
   public static void main(String[] args) {
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
     }
@@ -38,30 +35,25 @@ public class JDBCMessageOfTheDay {
       return;
     }
 
+    Connection connection = null;
+    Statement statement = null;
 
     try {
       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_jdbc", "root", "password");
-
-      preparedStatement = connection.prepareStatement("SELECT message FROM MessageOfTheDay WHERE id = ?");
-      preparedStatement.setInt(1, 42); // messageId
-
-      ResultSet resultSet = preparedStatement.executeQuery();
+      statement = connection.createStatement( );
+      ResultSet resultSet = statement.executeQuery("SELECT message, id FROM MessageOfTheDay");
 
       if (resultSet.next()) {
-        MessageOfTheDay messageOfTheDay = new MessageOfTheDay();
-        messageOfTheDay.setMessage(resultSet.getString(1));
-        messageOfTheDay.setId(42);
-
-        System.out.println(messageOfTheDay.getMessage());
+        System.out.println(resultSet.getString("id") + ": " + resultSet.getString("message"));
       }
     }
     catch (SQLException sql) {
       sql.printStackTrace();
     }
     finally {
-      if (preparedStatement != null) {
+      if (statement != null) {
         try {
-          preparedStatement.close();
+          statement.close();
         }
         catch (SQLException sql) {
           sql.printStackTrace();

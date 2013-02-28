@@ -1,4 +1,4 @@
-package Chapter.One;
+package MessageOfTheDay;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,8 +36,16 @@ public class PopulateMessageOfTheDay {
       connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_jdbc", "root", "password");
       preparedStatement = connection.prepareStatement("INSERT INTO MessageOfTheDay (id, message) VALUES (?, ?)");
 
-      preparedStatement.setInt(1, 42);                                  // messageId
-      preparedStatement.setString(2, "This is the message of the day"); // message
+      // Note: PreparedStatements allow you to have IN parameters, which are identified by ? placeholders in the SQL query.
+
+      // -- set the values for the IN parameters
+      int messageId = 42;
+      preparedStatement.setInt(1, messageId);
+      
+      String message = "This is the message of the day";
+      preparedStatement.setString(2, message);
+      // --
+
       preparedStatement.executeUpdate();
     }
     catch (SQLException sql) {

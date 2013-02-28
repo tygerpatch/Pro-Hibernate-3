@@ -1,4 +1,4 @@
-package Chapter.One;
+package MessageOfTheDay;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

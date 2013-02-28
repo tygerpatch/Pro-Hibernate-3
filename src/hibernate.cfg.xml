@@ -13,32 +13,45 @@
     <property name="current_session_context_class">thread</property>
 
     <!-- Chapter 3 : Building a Simple Application -->
+    <!--
     <property name="pool_size">5</property>
+    -->
 
     <!-- Chapter 1 : An Introduction to Hibernate 3 -->
+    <!--
     <mapping resource="Chapter/One/pojo/MessageOfTheDay.hbm.xml" />
+    -->
 
     <!-- Chapter 3 : Building a Simple Application -->
+    <!--
     <mapping resource="Chapter/Three/pojo/Advert.hbm.xml" />
     <mapping resource="Chapter/Three/pojo/Category.hbm.xml" />
     <mapping resource="Chapter/Three/pojo/Phone.hbm.xml" />
     <mapping resource="Chapter/Three/pojo/User.hbm.xml" />
+    -->
 
     <!-- Chapter 4 : Using Annotations with Hibernate -->
+    <!--
     <mapping class="Chapter.Four.pojo.Author"/>
     <mapping class="Chapter.Four.pojo.Book"/>
+    -->
 
     <!-- Chapter 7 : Querying Objects with Criteria -->
     <!-- (Chapter 8 : Querying with HQL and SQL) -->
+    <!--
     <mapping resource="Chapter/Seven/pojo/Product.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Software.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Supplier.hbm.xml"/>
+    -->
 
     <!-- Chapter 9 : Using the Session -->
+    <!--
     <mapping resource="com/hibernatebook/chapter09/deadlock/Publisher.hbm.xml"/>
     <mapping resource="com/hibernatebook/chapter09/deadlock/Subscriber.hbm.xml"/>
+    -->
 
     <!-- Chapter 10 : Design Considerations with Hibernate 3 -->
+    <!--
     <mapping resource="com/hibernatebook/casestudy/pojo/Product.hbm.xml"/>
     <mapping resource="com/hibernatebook/casestudy/pojo/Price.hbm.xml"/>
     <mapping resource="com/hibernatebook/casestudy/pojo/CatalogEntry.hbm.xml"/>
@@ -46,19 +59,26 @@
     <mapping resource="com/hibernatebook/casestudy/pojo/Order.hbm.xml"/>
     <mapping resource="com/hibernatebook/casestudy/pojo/Stock.hbm.xml"/>
     <mapping resource="com/hibernatebook/casestudy/pojo/Catalog.hbm.xml"/>
+    -->
 
     <!-- Chapter 11 : Events and Interceptors -->
+    <!--
     <mapping resource="com/hibernatebook/chapter10/events/Booking.hbm.xml"/>
     <mapping resource="com/hibernatebook/chapter10/events/TestEntity.hbm.xml"/>
+    -->
 
     <!--  Chapter 12 : Hibernate Filters -->
+    <!--
     <mapping resource="com/hibernatebook/filters/User.hbm.xml"/>
+    -->
 
     <!--  Chapter 13 : Fitting Hibernate into the Existing Environment -->
+    <!--
     <mapping resource="com/hibernatebook/legacy/Color.hbm.xml"/>
     <mapping resource="com/hibernatebook/legacy/ProductData.hbm.xml"/>
     <mapping resource="com/hibernatebook/legacy/Product.hbm.xml"/>
     <mapping resource="com/hibernatebook/legacy/Client.hbm.xml"/>
+    -->
   </session-factory>
 </hibernate-configuration>
 <!--
