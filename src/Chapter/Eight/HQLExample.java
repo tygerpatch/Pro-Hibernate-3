@@ -107,15 +107,16 @@ public class HQLExample {
 //
 //    }
 //  }
-  
-  
+
   // *** Methods that use displayProductsList
-  
-//public void executeSimpleHQL(Session session) {
-//Query query = session.createQuery("from Product");
-//List results = query.list();
-//displayProductsList(results);
-//}
+
+  public void executeSimpleHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Query query = session.createQuery("from Product");
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeFullyQualifiedHQL() {
     Session session = HibernateUtil.getSession();
@@ -401,5 +402,8 @@ public class HQLExample {
     //System.out.println("=== Execute Fully Qualified HQL ===");
     //example.executeFullyQualifiedHQL();
     // BUG: throws  org.hibernate.hql.internal.ast.QuerySyntaxException: com.hibernatebook.criteria.Product is not mapped [from com.hibernatebook.criteria.Product]
+
+    System.out.println("=== Execute Simple HQL ===");
+    example.executeSimpleHQL();
   }
 }
