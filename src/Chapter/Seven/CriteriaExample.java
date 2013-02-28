@@ -131,13 +131,15 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeNotEqualsCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.ne("name", "Mouse"));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeNotEqualsCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.ne("name", "Mouse"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeLikePatternCriteria() {
     Session session = HibernateUtil.getSession();
@@ -547,8 +549,11 @@ public class CriteriaExample {
     // System.out.println("=== Execute ilike Match Mode Criteria ===");
     // example.executeILikeMatchModeCriteria();
 
-    System.out.println("=== Execute Like Pattern Criteria ===");
-    example.executeLikePatternCriteria();
+    // System.out.println("=== Execute Like Pattern Criteria ===");
+    // example.executeLikePatternCriteria();
+
+    System.out.println("=== Execute Not-Equals Criteria ===");
+    example.executeNotEqualsCriteria();
     // stuff
 
     // System.out.println("=== Execute Distinct Criteria ===");
