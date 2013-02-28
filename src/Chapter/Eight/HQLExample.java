@@ -77,12 +77,14 @@ public class HQLExample {
 //displayObjectsList(results);
 //}
 
-//public void executeAssociationObjectsHQL(Session session) {
-//String hql = "from Product p inner join p.supplier as s";
-//Query query = session.createQuery(hql);
-//List results = query.list();
-//displayObjectsList(results);
-//}
+  public void executeAssociationObjectsHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "from Product p inner join p.supplier as s";
+    Query query = session.createQuery(hql);
+    displayObjectsList(query.list());
+    transaction.commit();
+  }
 
   public void executeCountHQL() {
     Session session = HibernateUtil.getSession();
@@ -411,5 +413,8 @@ public class HQLExample {
     // *** Methods that use displayObjectsList
     System.out.println("=== Execute Count HQL ===");
     example.executeCountHQL();
+
+    System.out.println("=== Execute Association Objects HQL ===");
+    example.executeAssociationObjectsHQL();
   }
 }
