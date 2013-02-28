@@ -166,13 +166,15 @@ public class CriteriaExample {
   // displayProductsList(results);
   // }
   //
-  // public void executeAndCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.gt("price", new Double(25.0)));
-  // crit.add(Restrictions.like("name", "K%"));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+  public void executeAndCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.gt("price", new Double(25.0)));
+    criteria.add(Restrictions.like("name", "K%"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeOrCriteria() {
     Session session = HibernateUtil.getSession();
@@ -521,11 +523,14 @@ public class CriteriaExample {
     // System.out.println("=== Execute And-Or Criteria ===");
     // example.executeAndOrCriteria();
 
-    System.out.println("=== Execute Or Criteria ===");
-    example.executeOrCriteria();
+    // System.out.println("=== Execute Or Criteria ===");
+    // example.executeOrCriteria();
+
+    System.out.println("=== Execute And Criteria ===");
+    example.executeAndCriteria();
     // stuff
 
-    //System.out.println("=== Execute Distinct Criteria ===");
-    //example.executeDistinctCriteria();
+    // System.out.println("=== Execute Distinct Criteria ===");
+    // example.executeDistinctCriteria();
   }
 }
