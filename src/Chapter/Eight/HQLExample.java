@@ -21,16 +21,7 @@ import Chapter.Three.Cameron_Mckenzie.HibernateUtil;
 
 public class HQLExample {
 
-//
-//  public void executeCommentedHQL(Session session) {
-//    String hql = "from Supplier";
-//    Query query = session.createQuery(hql);
-//    query.setComment("My HQL: " + hql);
-//    List results = query.list();
-//  }
-//
-//
-
+  // *** Methods that use displayObjectList
 
 //  public void executeNamedQuery(Session session) {
 //
@@ -54,7 +45,6 @@ public class HQLExample {
 //    displayObjectList(results);
 //
 //  }
-
 
 //
 //  public void displayObjectList(List list) {
@@ -236,26 +226,6 @@ public class HQLExample {
 //      System.out.println(msg);
 //    }
 //  }
-
-  // ===
-  
-//  public void displaySoftwareList(List list) {
-//    Iterator iter = list.iterator();
-//    if (!iter.hasNext()) {
-//      System.out.println("No software to display.");
-//      return;
-//    }
-//    while (iter.hasNext()) {
-//      Software software = (Software) iter.next();
-//      String msg = software.getSupplier().getName() + "\t";
-//      msg += software.getName() + "\t";
-//      msg += software.getPrice() + "\t";
-//      msg += software.getDescription() + "\t";
-//      msg += software.getVersion();
-//      System.out.println(msg);
-//    }
-//  }
-//
   
   // *** Methods that use displaySupplierList
 
