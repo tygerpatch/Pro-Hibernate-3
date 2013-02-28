@@ -31,8 +31,6 @@ public class MessageOfTheDay {
     return id;
   }
 
-  // TODO: Why is the @Id on the get method?
-
   public void setId(int id) {
     this.id = id;
   }
