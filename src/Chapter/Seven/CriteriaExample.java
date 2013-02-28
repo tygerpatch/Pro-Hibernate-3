@@ -219,18 +219,20 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeUniqueResultCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // Criterion price = Restrictions.gt("price", new Double(25.0));
-  // crit.setMaxResults(1);
-  // Product product = (Product) crit.uniqueResult();
-  // // test for null here if needed
-  //
-  // List results = new ArrayList();
-  // results.add(product);
-  // displayProductsList(results);
-  // }
+
+  public void executeUniqueResultCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    Criterion price = Restrictions.gt("price", new Double(25.0));
+    criteria.setMaxResults(1);
+    Product product = (Product) criteria.uniqueResult();
+    // test for null here if needed
+    List results = new ArrayList();
+    results.add(product);
+    displayProductsList(results);
+    transaction.commit();
+  }
 
   public void executeUniqueResultExceptionCriteria() {
     Session session = HibernateUtil.getSession();
@@ -485,8 +487,11 @@ public class CriteriaExample {
     // System.out.println("=== Execute Order Criteria ===");
     // example.executeOrderCriteria();
 
-    // System.out.println("=== Execute Unique Result Exception Criteria ===");
+    // System.out.println("=== Execute Non-Unique Result Exception Criteria ===");
     // example.executeUniqueResultExceptionCriteria();
     // BUG: throws org.hibernate.NonUniqueResultException: query did not return a unique result
+
+    System.out.println("=== Execute Unique Result Exception Criteria ===");
+    example.executeUniqueResultCriteria();
   }
 }
