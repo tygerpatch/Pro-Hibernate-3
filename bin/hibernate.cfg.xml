@@ -33,20 +33,23 @@
     <mapping resource="Chapter/Seven/pojo/Product.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Software.hbm.xml"/>
     <mapping resource="Chapter/Seven/pojo/Supplier.hbm.xml"/>
-    
+
     <!-- Chapter 9 : Using the Session -->
     <mapping resource="com/hibernatebook/chapter09/deadlock/Publisher.hbm.xml"/>
     <mapping resource="com/hibernatebook/chapter09/deadlock/Subscriber.hbm.xml"/>
-    
+
     <!-- Chapter 10 : Design Considerations with Hibernate 3 -->
-        <mapping resource="com/hibernatebook/casestudy/pojo/Product.hbm.xml"/>
-      <mapping resource="com/hibernatebook/casestudy/pojo/Price.hbm.xml"/>
-      <mapping resource="com/hibernatebook/casestudy/pojo/CatalogEntry.hbm.xml"/>
-      <mapping resource="com/hibernatebook/casestudy/pojo/LineItem.hbm.xml"/>
-      <mapping resource="com/hibernatebook/casestudy/pojo/Order.hbm.xml"/>
-      <mapping resource="com/hibernatebook/casestudy/pojo/Stock.hbm.xml"/>
-      <mapping resource="com/hibernatebook/casestudy/pojo/Catalog.hbm.xml"/>
-    
+    <mapping resource="com/hibernatebook/casestudy/pojo/Product.hbm.xml"/>
+    <mapping resource="com/hibernatebook/casestudy/pojo/Price.hbm.xml"/>
+    <mapping resource="com/hibernatebook/casestudy/pojo/CatalogEntry.hbm.xml"/>
+    <mapping resource="com/hibernatebook/casestudy/pojo/LineItem.hbm.xml"/>
+    <mapping resource="com/hibernatebook/casestudy/pojo/Order.hbm.xml"/>
+    <mapping resource="com/hibernatebook/casestudy/pojo/Stock.hbm.xml"/>
+    <mapping resource="com/hibernatebook/casestudy/pojo/Catalog.hbm.xml"/>
+
+    <!-- Chapter 11 : Events and Interceptors -->
+    <mapping resource="com/hibernatebook/chapter10/events/Booking.hbm.xml"/>
+    <mapping resource="com/hibernatebook/chapter10/events/TestEntity.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
 <!--
