@@ -236,15 +236,15 @@ public class HQLExample {
 //displaySupplierList(results);
 //}
 
-//public void executeSelectSQL(Session session) {
-//String sql = "select {supplier.*} from Supplier supplier";
-//
-//SQLQuery query = session.createSQLQuery(sql);
-//query.addEntity("supplier", Supplier.class);
-//List results = query.list();
-//displaySupplierList(results);
-//
-//}
+  public void executeSelectSQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String sql = "select {supplier.*} from Supplier supplier";
+    SQLQuery query = session.createSQLQuery(sql);
+    query.addEntity("supplier", Supplier.class);
+    displaySupplierList(query.list());
+    transaction.commit();
+  }
 
   public void executeUpdateHQL() {
     Session session = HibernateUtil.getSession();
@@ -342,7 +342,10 @@ public class HQLExample {
     example.populate();
 
     // *** Methods that use displaySupplierList
-    System.out.println("=== Execute Update HQL ===");
-    example.executeUpdateHQL();
+    //System.out.println("=== Execute Update HQL ===");
+    //example.executeUpdateHQL();
+
+    System.out.println("=== Execute Select SQL ===");
+    example.executeSelectSQL();
   }
 }
