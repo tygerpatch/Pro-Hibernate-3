@@ -409,5 +409,7 @@ public class HQLExample {
     //example.executeSimpleHQL();
 
     // *** Methods that use displayObjectsList
+    System.out.println("=== Execute Count HQL ===");
+    example.executeCountHQL();
   }
 }
