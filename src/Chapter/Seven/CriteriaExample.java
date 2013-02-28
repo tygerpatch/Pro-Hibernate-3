@@ -158,14 +158,16 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeGreaterThanCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.gt("price", new Double(25.0)));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
-  //
+
+  public void executeGreaterThanCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.gt("price", new Double(25.0)));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
+
   public void executeAndCriteria() {
     Session session = HibernateUtil.getSession();
     Transaction transaction = session.beginTransaction();
@@ -526,8 +528,11 @@ public class CriteriaExample {
     // System.out.println("=== Execute Or Criteria ===");
     // example.executeOrCriteria();
 
-    System.out.println("=== Execute And Criteria ===");
-    example.executeAndCriteria();
+    // System.out.println("=== Execute And Criteria ===");
+    // example.executeAndCriteria();
+
+    System.out.println("=== Execute Greater-Than Criteria ===");
+    example.executeGreaterThanCriteria();
     // stuff
 
     // System.out.println("=== Execute Distinct Criteria ===");
