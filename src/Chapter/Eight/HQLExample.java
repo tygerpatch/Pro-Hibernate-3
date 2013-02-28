@@ -246,33 +246,34 @@ public class HQLExample {
 //
 //}
 
-//public void executeUpdateHQL(Session session) {
-//String hql = "update Supplier set name = :newName where name = :name";
-//Query query = session.createQuery(hql);
-//query.setString("name", "SuperCorp");
-//query.setString("newName", "MegaCorp");
-//int rowCount = query.executeUpdate();
-//System.out.println("Rows affected: " + rowCount);
-//
-//// See the results of the update
-//query = session.createQuery("from Supplier");
-//List results = query.list();
-//
-//displaySupplierList(results);
-//}
+  public void executeUpdateHQL(Session session) {
+    String hql = "update Supplier set name = :newName where name = :name";
+    Query query = session.createQuery(hql);
+    query.setString("name", "SuperCorp");
+    query.setString("newName", "MegaCorp");
+    int rowCount = query.executeUpdate();
+    System.out.println("Rows affected: " + rowCount);
 
-//  public void displaySupplierList(List list) {
-//    Iterator iter = list.iterator();
-//    if (!iter.hasNext()) {
-//      System.out.println("No suppliers to display.");
-//      return;
-//    }
-//    while (iter.hasNext()) {
-//      Supplier supplier = (Supplier) iter.next();
-//      String msg = supplier.getName();
-//      System.out.println(msg);
-//    }
-//  }
+    // See the results of the update
+    query = session.createQuery("from Supplier");
+    List results = query.list();
+
+    displaySupplierList(results);
+  }
+
+  private void displaySupplierList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No suppliers to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      Supplier supplier = (Supplier) iterator.next();
+      System.out.println(supplier.getName());
+    }
+  }
 
   public void populate() {
     Supplier supplier = null;
