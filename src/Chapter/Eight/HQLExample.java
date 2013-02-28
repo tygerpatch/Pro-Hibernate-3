@@ -229,12 +229,14 @@ public class HQLExample {
   
   // *** Methods that use displaySupplierList
 
-//public void executeFetchAssociationsHQL(Session session) {
-//String hql = "from Supplier s inner join fetch s.products as p";
-//Query query = session.createQuery(hql);
-//List results = query.list();
-//displaySupplierList(results);
-//}
+  public void executeFetchAssociationsHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "from Supplier s inner join fetch s.products as p";
+    Query query = session.createQuery(hql);
+    displaySupplierList(query.list());
+    transaction.commit();
+  }
 
   public void executeSelectSQL() {
     Session session = HibernateUtil.getSession();
@@ -345,7 +347,10 @@ public class HQLExample {
     //System.out.println("=== Execute Update HQL ===");
     //example.executeUpdateHQL();
 
-    System.out.println("=== Execute Select SQL ===");
-    example.executeSelectSQL();
+    //System.out.println("=== Execute Select SQL ===");
+    //example.executeSelectSQL();
+
+    System.out.println("=== Execute Fetch Association HQL ===");
+    example.executeFetchAssociationsHQL();
   }
 }
