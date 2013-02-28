@@ -157,13 +157,15 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeNamedParametersHQL(Session session) {
-//String hql = "from Product where price > :price";
-//Query query = session.createQuery(hql);
-//query.setDouble("price", 25.0);
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executeNamedParametersHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "from Product where price > :price";
+    Query query = session.createQuery(hql);
+    query.setDouble("price", 25.0);
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeObjectNamedParametersHQL() {
     Session session = HibernateUtil.getSession();
@@ -377,7 +379,10 @@ public class HQLExample {
     //System.out.println("=== Execute Paging HQL ===");
     //example.executePagingHQL();
 
-    System.out.println("=== Execute Object Named Paramters HQL ===");
-    example.executeObjectNamedParametersHQL();
+    //System.out.println("=== Execute Object Named Paramters HQL ===");
+    //example.executeObjectNamedParametersHQL();
+
+    System.out.println("=== Execute Named Parameters HQL ===");
+    example.executeNamedParametersHQL();
   }
 }
