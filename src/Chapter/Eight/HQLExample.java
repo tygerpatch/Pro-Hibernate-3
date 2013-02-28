@@ -35,32 +35,32 @@ public class HQLExample {
 //    results = query.list();
 //    displayObjectList(results);
 //  }
-//
-//  public void executeScalarSQL(Session session) {
-//    String sql = "select avg(product.price) as avgPrice from Product product";
-//
-//    SQLQuery query = session.createSQLQuery(sql);
-//    query.addScalar("avgPrice", Hibernate.DOUBLE);
-//    List results = query.list();
-//    displayObjectList(results);
-//
-//  }
 
-//
-//  public void displayObjectList(List list) {
-//    Iterator iter = list.iterator();
-//    if (!iter.hasNext()) {
-//      System.out.println("No objects to display.");
-//      return;
-//    }
-//    while (iter.hasNext()) {
-//      Object obj = iter.next();
-//      System.out.println(obj.getClass().getName());
-//      System.out.println(obj);
-//    }
-//  }
-  
-  
+  public void executeScalarSQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String sql = "select avg(product.price) as avgPrice from Product product";
+    SQLQuery query = session.createSQLQuery(sql);
+    query.addScalar("avgPrice", Hibernate.DOUBLE);
+    displayObjectList(query.list());
+    transaction.commit();
+  }
+
+  private void displayObjectList(List list) {
+    Iterator iterator = list.iterator();
+
+    if (!iterator.hasNext()) {
+      System.out.println("No objects to display.");
+      return;
+    }
+
+    while (iterator.hasNext()) {
+      Object obj = iterator.next();
+      System.out.println(obj.getClass().getName());
+      System.out.println(obj);
+    }
+  }
+
   // *** Methods that use displayObjectsList
 
   public void executeProjectionHQL() {
@@ -423,7 +423,9 @@ public class HQLExample {
     //System.out.println("=== Execute Association HQL ===");
     //example.executeAssociationsHQL();
 
-    System.out.println("=== Execute Projection HQL ===");
-    example.executeProjectionHQL();
+    //System.out.println("=== Execute Projection HQL ===");
+    //example.executeProjectionHQL();
+
+    // *** Methods that use displayObjectList
   }
 }
