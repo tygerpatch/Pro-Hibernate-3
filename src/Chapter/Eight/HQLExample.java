@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -23,28 +22,25 @@ public class HQLExample {
 
   // *** Methods that use displayObjectList
 
-//  public void executeNamedQuery(Session session) {
-//
-//    Query query = session
-//        .getNamedQuery("com.hibernatebook.criteria.Product.HQLpricing");
-//    List results = query.list();
-//    displayObjectList(results);
-//
-//    query = session
-//        .getNamedQuery("com.hibernatebook.criteria.Product.SQLpricing");
-//    results = query.list();
-//    displayObjectList(results);
-//  }
-
-  public void executeScalarSQL() {
+  public void executeNamedQuery() {
     Session session = HibernateUtil.getSession();
     Transaction transaction = session.beginTransaction();
-    String sql = "select avg(product.price) as avgPrice from Product product";
-    SQLQuery query = session.createSQLQuery(sql);
-    query.addScalar("avgPrice", Hibernate.DOUBLE);
+    Query query = session.getNamedQuery("Chapter.Seven.pojo.Product.HQLpricing");
+    displayObjectList(query.list());
+    query = session.getNamedQuery("Chapter.Seven.pojo.Product.SQLpricing");
     displayObjectList(query.list());
     transaction.commit();
   }
+
+//  public void executeScalarSQL() {
+//    Session session = HibernateUtil.getSession();
+//    Transaction transaction = session.beginTransaction();
+//    String sql = "select avg(product.price) as avgPrice from Product product";
+//    SQLQuery query = session.createSQLQuery(sql);
+//    query.addScalar("avgPrice", Hibernate.DOUBLE); // BUG: DOUBLE cannot be resolved
+//    displayObjectList(query.list());
+//    transaction.commit();
+//  }
 
   private void displayObjectList(List list) {
     Iterator iterator = list.iterator();
@@ -427,5 +423,12 @@ public class HQLExample {
     //example.executeProjectionHQL();
 
     // *** Methods that use displayObjectList
+
+    //System.out.println("=== Execute Scalar SQL ===");
+    //example.executeScalarSQL();
+
+    System.out.println("=== Execute Named Query ===");
+    example.executeNamedQuery();
+    // throws  org.hibernate.MappingException: Named query not known: com.hibernatebook.criteria.Product.HQLpricing
   }
 }
