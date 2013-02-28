@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
@@ -180,17 +181,19 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeAndOrCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // Criterion price = Restrictions.gt("price", new Double(25.0));
-  // Criterion name = Restrictions.like("name", "Mou%");
-  // LogicalExpression orExp = Restrictions.or(price, name);
-  // crit.add(orExp);
-  // crit.add(Restrictions.ilike("description", "blocks%"));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeAndOrCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criterion price = Restrictions.gt("price", new Double(25.0));
+    Criterion name = Restrictions.like("name", "Mou%");
+    LogicalExpression orExp = Restrictions.or(price, name);
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(orExp);
+    criteria.add(Restrictions.ilike("description", "blocks%"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeDisjunctionCriteria() {
     Session session = HibernateUtil.getSession();
@@ -508,7 +511,10 @@ public class CriteriaExample {
     // System.out.println("=== Execute SQL Criteria ===");
     // example.executeSQLCriteria();
 
-    System.out.println("=== Execute Disjunction Criteria ===");
-    example.executeDisjunctionCriteria();
+    // System.out.println("=== Execute Disjunction Criteria ===");
+    // example.executeDisjunctionCriteria();
+
+    System.out.println("=== Execute And-Or Criteria ===");
+    example.executeAndOrCriteria();
   }
 }
