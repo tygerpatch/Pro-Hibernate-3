@@ -11,6 +11,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
@@ -144,13 +145,15 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executeILikeMatchModeCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.ilike("name", "browser", MatchMode.END));
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executeILikeMatchModeCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.ilike("name", "browser", MatchMode.END));
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeNullCriteria() {
     Session session = HibernateUtil.getSession();
@@ -536,8 +539,11 @@ public class CriteriaExample {
     // System.out.println("=== Execute Greater-Than Criteria ===");
     // example.executeGreaterThanCriteria();
 
-    System.out.println("=== Execute Null Criteria ===");
-    example.executeNullCriteria();
+    // System.out.println("=== Execute Null Criteria ===");
+    // example.executeNullCriteria();
+
+    System.out.println("=== Execute ilike Match Mode Criteria ===");
+    example.executeILikeMatchModeCriteria();
     // stuff
 
     // System.out.println("=== Execute Distinct Criteria ===");
