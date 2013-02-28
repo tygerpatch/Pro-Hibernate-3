@@ -124,19 +124,19 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeDeleteHQL(Session session) {
-//String hql = "delete from Product where name = :name";
-//Query query = session.createQuery(hql);
-//query.setString("name", "Mouse");
-//int rowCount = query.executeUpdate();
-//System.out.println("Rows affected: " + rowCount);
-//
-//// See the results of the update
-//query = session.createQuery("from Product");
-//List results = query.list();
-//
-//displayProductsList(results);
-//}
+  public void executeDeleteHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String hql = "delete from Product where name = :name";
+    Query query = session.createQuery(hql);
+    query.setString("name", "Mouse");
+    int rowCount = query.executeUpdate();
+    System.out.println("Rows affected: " + rowCount);
+    // See the results of the update
+    query = session.createQuery("from Product");
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeCriteriaForRestrictions() {
     Session session = HibernateUtil.getSession();
@@ -149,7 +149,6 @@ public class HQLExample {
     criteria.add(Restrictions.ilike("description", "blocks%"));
     displayProductsList(criteria.list());
     transaction.commit();
-
   }
 
   public void executeHQLForRestrictions() {
@@ -392,7 +391,10 @@ public class HQLExample {
     //System.out.println("=== Execute HQL for Restrictions ===");
     //example.executeHQLForRestrictions();
 
-    System.out.println("=== Execute Criteria for Restrictions ===");
-    example.executeCriteriaForRestrictions();
+    //System.out.println("=== Execute Criteria for Restrictions ===");
+    //example.executeCriteriaForRestrictions();
+
+    System.out.println("=== Execute Delete HQL ===");
+    example.executeDeleteHQL();
   }
 }
