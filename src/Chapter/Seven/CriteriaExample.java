@@ -211,14 +211,16 @@ public class CriteriaExample {
   // List results = crit.list();
   // displayProductsList(results);
   // }
-  //
-  // public void executePagingCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.setFirstResult(1);
-  // crit.setMaxResults(2);
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+
+  public void executePagingCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.setFirstResult(1);
+    criteria.setMaxResults(2);
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   public void executeUniqueResultCriteria() {
     Session session = HibernateUtil.getSession();
@@ -491,7 +493,10 @@ public class CriteriaExample {
     // example.executeUniqueResultExceptionCriteria();
     // BUG: throws org.hibernate.NonUniqueResultException: query did not return a unique result
 
-    System.out.println("=== Execute Unique Result Exception Criteria ===");
-    example.executeUniqueResultCriteria();
+    //System.out.println("=== Execute Unique Result Exception Criteria ===");
+    //example.executeUniqueResultCriteria();
+
+    System.out.println("=== Execute Paging Criteria ===");
+    example.executePagingCriteria();
   }
 }
