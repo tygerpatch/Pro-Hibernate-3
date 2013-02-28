@@ -107,14 +107,16 @@ public class CriteriaExample {
 
   // **** Methods that use displayProductsList
 
-  // public void executeDistinctCriteria(Session session) {
-  // Criteria crit = session.createCriteria(Product.class);
-  // crit.add(Restrictions.gt("price", new Double(25.0)));
-  // crit.add(Restrictions.like("name", "K%"));
-  // crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-  // List results = crit.list();
-  // displayProductsList(results);
-  // }
+  public void executeDistinctCriteria() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(Restrictions.gt("price", new Double(25.0)));
+    criteria.add(Restrictions.like("name", "K%"));
+    criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+    displayProductsList(criteria.list());
+    transaction.commit();
+  }
 
   // public void executeSimpleCriteria(Session session) {
   // Criteria crit = session.createCriteria(Product.class);
@@ -514,7 +516,12 @@ public class CriteriaExample {
     // System.out.println("=== Execute Disjunction Criteria ===");
     // example.executeDisjunctionCriteria();
 
-    System.out.println("=== Execute And-Or Criteria ===");
-    example.executeAndOrCriteria();
+    // System.out.println("=== Execute And-Or Criteria ===");
+    // example.executeAndOrCriteria();
+
+    // stuff
+
+    System.out.println("=== Execute Distinct Criteria ===");
+    example.executeDistinctCriteria();
   }
 }
