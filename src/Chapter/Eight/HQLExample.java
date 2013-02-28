@@ -165,17 +165,18 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeObjectNamedParametersHQL(Session session) {
-//String supplierHQL = "from Supplier where name='MegaInc'";
-//Query supplierQuery = session.createQuery(supplierHQL);
-//Supplier supplier = (Supplier) supplierQuery.list().get(0);
-//
-//String hql = "from Product as product where product.supplier=:supplier";
-//Query query = session.createQuery(hql);
-//query.setEntity("supplier", supplier);
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executeObjectNamedParametersHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    String supplierHQL = "from Supplier where name='MegaInc'";
+    Query supplierQuery = session.createQuery(supplierHQL);
+    Supplier supplier = (Supplier) supplierQuery.list().get(0);
+    String hql = "from Product as product where product.supplier=:supplier";
+    Query query = session.createQuery(hql);
+    query.setEntity("supplier", supplier);
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executePagingHQL() {
     Session session = HibernateUtil.getSession();
@@ -373,7 +374,10 @@ public class HQLExample {
     //System.out.println("=== Execute Unique Result HQL ===");
     //example.executeUniqueResultHQL();
 
-    System.out.println("=== Execute Paging HQL ===");
-    example.executePagingHQL();
+    //System.out.println("=== Execute Paging HQL ===");
+    //example.executePagingHQL();
+
+    System.out.println("=== Execute Object Named Paramters HQL ===");
+    example.executeObjectNamedParametersHQL();
   }
 }
