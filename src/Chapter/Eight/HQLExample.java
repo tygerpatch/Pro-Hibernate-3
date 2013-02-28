@@ -246,19 +246,19 @@ public class HQLExample {
 //
 //}
 
-  public void executeUpdateHQL(Session session) {
+  public void executeUpdateHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
     String hql = "update Supplier set name = :newName where name = :name";
     Query query = session.createQuery(hql);
     query.setString("name", "SuperCorp");
     query.setString("newName", "MegaCorp");
     int rowCount = query.executeUpdate();
     System.out.println("Rows affected: " + rowCount);
-
     // See the results of the update
     query = session.createQuery("from Supplier");
-    List results = query.list();
-
-    displaySupplierList(results);
+    displaySupplierList(query.list());
+    transaction.commit();
   }
 
   private void displaySupplierList(List list) {
@@ -342,5 +342,7 @@ public class HQLExample {
     example.populate();
 
     // *** Methods that use displaySupplierList
+    System.out.println("=== Execute Update HQL ===");
+    example.executeUpdateHQL();
   }
 }
