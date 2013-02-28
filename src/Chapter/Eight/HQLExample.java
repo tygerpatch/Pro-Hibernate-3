@@ -138,17 +138,19 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executeCriteriaForRestrictions(Session session) {
-//Criteria crit = session.createCriteria(Product.class);
-//Criterion price = Restrictions.gt("price", new Double(25.0));
-//Criterion name = Restrictions.like("name", "Mou%");
-//LogicalExpression orExp = Restrictions.or(price, name);
-//crit.add(orExp);
-//crit.add(Restrictions.ilike("description", "blocks%"));
-//List results = crit.list();
-//displayProductsList(results);
-//
-//}
+  public void executeCriteriaForRestrictions() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Criterion price = Restrictions.gt("price", new Double(25.0));
+    Criterion name = Restrictions.like("name", "Mou%");
+    LogicalExpression orExp = Restrictions.or(price, name);
+    Criteria criteria = session.createCriteria(Product.class);
+    criteria.add(orExp);
+    criteria.add(Restrictions.ilike("description", "blocks%"));
+    displayProductsList(criteria.list());
+    transaction.commit();
+
+  }
 
   public void executeHQLForRestrictions() {
     Session session = HibernateUtil.getSession();
@@ -387,7 +389,10 @@ public class HQLExample {
     //System.out.println("=== Execute Named Parameters HQL ===");
     //example.executeNamedParametersHQL();
 
-    System.out.println("=== Execute HQL for Restrictions ===");
-    example.executeHQLForRestrictions();
+    //System.out.println("=== Execute HQL for Restrictions ===");
+    //example.executeHQLForRestrictions();
+
+    System.out.println("=== Execute Criteria for Restrictions ===");
+    example.executeCriteriaForRestrictions();
   }
 }
