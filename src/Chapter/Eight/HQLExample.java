@@ -177,13 +177,15 @@ public class HQLExample {
 //displayProductsList(results);
 //}
 
-//public void executePagingHQL(Session session) {
-//Query query = session.createQuery("from Product");
-//query.setFirstResult(1);
-//query.setMaxResults(2);
-//List results = query.list();
-//displayProductsList(results);
-//}
+  public void executePagingHQL() {
+    Session session = HibernateUtil.getSession();
+    Transaction transaction = session.beginTransaction();
+    Query query = session.createQuery("from Product");
+    query.setFirstResult(1);
+    query.setMaxResults(2);
+    displayProductsList(query.list());
+    transaction.commit();
+  }
 
   public void executeUniqueResultHQL() {
     Session session = HibernateUtil.getSession();
@@ -368,7 +370,10 @@ public class HQLExample {
     //System.out.println("=== Execute Order HQL ===");
     //example.executeOrderHQL();
 
-    System.out.println("=== Execute Unique Result HQL ===");
-    example.executeUniqueResultHQL();
+    //System.out.println("=== Execute Unique Result HQL ===");
+    //example.executeUniqueResultHQL();
+
+    System.out.println("=== Execute Paging HQL ===");
+    example.executePagingHQL();
   }
 }
