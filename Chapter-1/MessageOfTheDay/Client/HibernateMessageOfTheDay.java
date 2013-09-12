@@ -1,11 +1,11 @@
-package MessageOfTheDay;
+package MessageOfTheDay.Client;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import Plain_Old_Java_Objects.MessageOfTheDay;
+import MessageOfTheDay.POJOs.MessageOfTheDay;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
@@ -34,7 +34,6 @@ public class HibernateMessageOfTheDay {
       System.out.println("No such message");
     }
 
-    // session.close();
-    // throws org.hibernate.SessionException: Session was already closed
+    // session.close();  // throws org.hibernate.SessionException: Session was already closed
   }
 }

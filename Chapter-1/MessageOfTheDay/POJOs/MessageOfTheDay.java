@@ -1,8 +1,16 @@
-package Plain_Old_Java_Objects;
+package MessageOfTheDay.POJOs;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+
 
 // Title: Pro Hibernate 3
 // Authors: Dave Minter, Jeff Linwood
@@ -17,6 +25,7 @@ import javax.persistence.Id;
 @Entity
 public class MessageOfTheDay {
 
+  private String message;
   private int id;
 
   // @Id tells Hibernate that this the primary key for this entity
@@ -34,8 +43,6 @@ public class MessageOfTheDay {
   public void setId(int id) {
     this.id = id;
   }
-
-  private String message;
 
   public String getMessage() {
     return message;

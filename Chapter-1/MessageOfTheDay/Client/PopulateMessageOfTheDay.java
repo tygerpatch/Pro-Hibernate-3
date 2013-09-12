@@ -1,4 +1,4 @@
-package MessageOfTheDay;
+package MessageOfTheDay.Client;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -41,7 +41,7 @@ public class PopulateMessageOfTheDay {
       // -- set the values for the IN parameters
       int messageId = 42;
       preparedStatement.setInt(1, messageId);
-      
+
       String message = "This is the message of the day";
       preparedStatement.setString(2, message);
       // --

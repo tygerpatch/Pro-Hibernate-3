@@ -1,4 +1,4 @@
-package MessageOfTheDay;
+package MessageOfTheDay.Client;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Plain_Old_Java_Objects.MessageOfTheDay;
+import MessageOfTheDay.POJOs.MessageOfTheDay;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
