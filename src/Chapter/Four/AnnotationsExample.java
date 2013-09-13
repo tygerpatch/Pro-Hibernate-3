@@ -34,6 +34,7 @@ public class AnnotationsExample {
 
     schemaExport.create(script, export);
 
+    // populate database
     Author jeff = new Author();
     jeff.setName("Jeff");
 
@@ -81,6 +82,7 @@ public class AnnotationsExample {
 
     transaction.commit();
 
+    // display
     Query query = session.createQuery("FROM Publisher p");
     query.setMaxResults(1);
     publisher = (Publisher) query.uniqueResult();
