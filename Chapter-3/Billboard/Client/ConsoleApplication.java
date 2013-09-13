@@ -70,7 +70,7 @@ public class ConsoleApplication {
   // Specifically, HibernateUtil's getSession and getInitializedConfiguration methods.
   private static SessionFactory factory;
 
-  public static Session getSession() {
+  private static Session getSession() {
     if (factory == null) {
       Configuration config = new AnnotationConfiguration();
 
