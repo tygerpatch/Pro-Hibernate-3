@@ -1,32 +1,52 @@
 package BookCatalog.POJOs;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.AccessType;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
 //Chapter 4 : Using Annotations with Hibernate
 //Page 68, 77 - 79
 
+//@Entity
+//@AccessType("property")
+
 @Entity
-@AccessType("property")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Book {
+
+  public Book() {
+  }
+
+//  public Book(String title, int pages, Date publicationDate) {
+//    this.title = "Pro Hibernate 3 ";
+//    this.pages = pages;
+//    this.publicationDate = publicationDate;
+//  }
+
+  protected String title;
+
+  //@Column(name = "working_title", length = 200, nullable = false)
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
   protected int pages;
 
   public int getPages() {
@@ -37,15 +57,15 @@ public class Book {
     this.pages = pages;
   }
 
-  protected String title;
+  protected Date publicationDate;
 
-  @Column(name = "working_title", length = 200, nullable = false)
-  public String getTitle() {
-    return title;
+  //@Transient
+  public Date getPublicationDate() {
+    return publicationDate;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setPublicationDate(Date publicationDate) {
+    this.publicationDate = publicationDate;
   }
 
   protected int id;
@@ -60,18 +80,26 @@ public class Book {
     this.id = id;
   }
 
-  protected Date publicationDate;
+  private List<Author> authors = new ArrayList<Author>();
 
-  @Transient
-  public Date getPublicationDate() {
-    return publicationDate;
+  @ManyToMany
+  @JoinTable(
+    name = "authors_books",
+    joinColumns = { @JoinColumn(name = "book_id") },
+    inverseJoinColumns = { @JoinColumn(name = "author_id") })
+  public List<Author> getAuthors() {
+    return authors;
   }
 
-  public void setPublicationDate(Date publicationDate) {
-    this.publicationDate = publicationDate;
+  public void setAuthors(List<Author> authors) {
+    this.authors = authors;
   }
 
-  protected Publisher publisher;
+  public boolean addAuthor(Author author) {
+    return authors.add(author);
+  }
+
+  private Publisher publisher;
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "publisher_id")
@@ -81,21 +109,5 @@ public class Book {
 
   public void setPublisher(Publisher publisher) {
     this.publisher = publisher;
-  }
-
-  protected Set<Author> authors = new HashSet<Author>();
-
-  @ManyToMany
-  public Set<Author> getAuthors() {
-    return authors;
-  }
-
-  public void setAuthors(Set<Author> authors) {
-    this.authors = authors;
-  }
-
-  // Convenience method, added by Todd Gerspacher
-  public boolean addAuthor(Author author) {
-    return authors.add(author);
   }
 }

@@ -1,7 +1,7 @@
 package BookCatalog.Client;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,50 +27,46 @@ public class ConsoleApplication {
     Session session = getSession();
     Transaction transaction = session.beginTransaction();
 
-    Author jeff = new Author();
-    jeff.setName("Jeff");
+    Author jeff = new Author("Jeff");
     session.save(jeff);
 
-    Author dave = new Author();
-    dave.setName("Dave");
+    Author dave = new Author("Dave");
     session.save(dave);
 
     Book book = new Book();
+    session.save(book);
 
     book.setTitle("Pro Hibernate 3 ");
     book.setPages(200);
     book.setPublicationDate(new Date());
 
-    jeff.addBook(book);
     book.addAuthor(jeff);
-
-    dave.addBook(book);
     book.addAuthor(dave);
 
     ComputerBook computerBook = new ComputerBook();
+    session.save(computerBook);
 
     computerBook.setTitle("Building Portals with the Java Portlet API");
     computerBook.setPages(350);
     computerBook.setSoftwareName("Apache Pluto");
 
-    jeff.addBook(computerBook);
     computerBook.addAuthor(jeff);
-
-    dave.addBook(computerBook);
     computerBook.addAuthor(dave);
 
     Publisher publisher = new Publisher();
+    session.save(publisher);
 
     publisher.setName("Apress");
     publisher.addBook(book);
     publisher.addBook(computerBook);
 
-    session.save(publisher);
     transaction.commit();
   }
 
   public void display() {
     Session session = getSession();
+    Transaction transaction = session.beginTransaction();
+
     Query query = session.createQuery("FROM Publisher p");
     query.setMaxResults(1);
     Publisher publisher = (Publisher) query.uniqueResult();
@@ -81,12 +77,12 @@ public class ConsoleApplication {
     }
 
     System.out.println("Publisher name: " + publisher.getName());
-    Set<Book> books = publisher.getBooks();
+    List<Book> books = publisher.getBooks();
 
     if (books != null) {
-      for (Book _book : books) {
-        System.out.println("Title: " + _book.getTitle());
-        Set<Author> authors = _book.getAuthors();
+      for (Book book : books) {
+        System.out.println("Title: " + book.getTitle());
+        List<Author> authors = book.getAuthors();
 
         if (authors != null) {
           for (Author author : authors) {
@@ -94,13 +90,13 @@ public class ConsoleApplication {
           }
         }
 
-        if (_book instanceof ComputerBook) {
-          System.out.println("Software: " + ((ComputerBook) _book).getSoftwareName());
+        if (book instanceof ComputerBook) {
+          System.out.println("Software: " + ((ComputerBook) book).getSoftwareName());
         }
       }
     }
 
-    session.close();
+    transaction.commit();
   }
 
   // The following was derived from the book "Hibernate Made Easy" by Cameron McKenzie.

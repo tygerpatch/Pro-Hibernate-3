@@ -1,8 +1,9 @@
 package BookCatalog.POJOs;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,19 +16,22 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Publisher {
-  protected Set<Book> books = new HashSet<Book>();
+  private List<Book> books = new ArrayList<Book>();
 
-  @OneToMany(mappedBy = "publisher")
-  public Set<Book> getBooks() {
+  @OneToMany(
+    mappedBy = "publisher",
+    targetEntity = Book.class,
+    cascade = CascadeType.ALL)
+  public List<Book> getBooks() {
     return books;
   }
 
-  public void setBooks(Set<Book> books) {
+  public void setBooks(List<Book> books) {
     this.books = books;
   }
 
-  // Convenience method, added by Todd Gerspacher
   public boolean addBook(Book book) {
+    book.setPublisher(this); // TODO: eliminate this statement
     return books.add(book);
   }
 

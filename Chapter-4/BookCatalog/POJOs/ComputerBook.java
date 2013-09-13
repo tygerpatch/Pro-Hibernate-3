@@ -1,8 +1,6 @@
 package BookCatalog.POJOs;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
