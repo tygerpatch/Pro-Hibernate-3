@@ -27,7 +27,7 @@ public class MessageOfTheDayTest {
     configuration.addAnnotatedClass(MessageOfTheDay.class);
     configuration.configure();
 
-    configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/my_jdbc_tests");
+    configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/pro-hibernate-3-tests");
   }
 
   @Before

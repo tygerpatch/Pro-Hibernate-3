@@ -39,7 +39,7 @@ public class JDBCMessageOfTheDay {
     Statement statement = null;
 
     try {
-      connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/my_jdbc", "root", "password");
+      connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pro-hibernate-3", "root", "password");
       statement = connection.createStatement( );
       ResultSet resultSet = statement.executeQuery("SELECT message, id FROM MessageOfTheDay");
 
