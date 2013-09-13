@@ -1,5 +1,6 @@
 package Billboard.POJOs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class Category {
     this.id = id;
   }
 
-  private List<Advert> adverts;
+  private List<Advert> adverts = new ArrayList<Advert>();
 
   @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
   @JoinTable(name = "categories_adverts", joinColumns = { @JoinColumn(name = "category_id") }, inverseJoinColumns = { @JoinColumn(name = "advert_id") })
@@ -51,8 +52,19 @@ public class Category {
     this.adverts = adverts;
   }
 
-  // convenience method
+  public Category() {
+  }
+
+  public Category(String title) {
+    this.title = title;
+  }
+
   public boolean addAdvert(Advert advert) {
     return adverts.add(advert);
+  }
+
+  public boolean addAdvert(String title, String message, User user) {
+    Advert advert = new Advert(title, message, user);
+    return addAdvert(advert);
   }
 }

@@ -1,6 +1,5 @@
 package Billboard.Client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -25,42 +24,44 @@ public class ConsoleApplication {
   }
 
   public void populateDatabase() {
-    Transaction transaction = getSession().beginTransaction();
+    Session session = getSession();
+    Transaction transaction = session.beginTransaction();
 
-    User dave = createUser("dminter", "london");
-    User jeff = createUser("jlinwood", "austin");
+    User dave = new User("dminter", "london");
+    session.save(dave);
 
-    createPhone("Mobile", "07973 000 000", dave);
-    createPhone("Home", "0208 000 000", dave);
-    createPhone("Work", "0207 000 000", dave);
-    createPhone("Cell", "555 000 001", jeff);
-    createPhone("Home", "555 000 002", jeff);
-    createPhone("Work", "555 000 003", jeff);
+    dave.addPhone("Home", "0208 000 000");
+    dave.addPhone("Work", "0207 000 000");
+    dave.addPhone("Mobile", "07973 000 000");
 
-    List<Advert> adverts = new ArrayList<Advert>();
+    User jeff = new User("jlinwood", "austin");
+    session.save(jeff);
 
-    adverts.add(createAdvert("Sinclair Spectrum for Sale", "48k, original box and packaging.", dave));
-    adverts.add(createAdvert("IBM PC for sale", "Original, not clone. 640Kb.", dave));
-    adverts.add(createAdvert("Apple II for sale", "Complete with paddles. Call after 5pm", dave));
-    adverts.add(createAdvert("Atari 2600 wanted", "Will pay up to $10", jeff));
-    adverts.add(createAdvert("Timex 2000 for sale", "Some games, $30", jeff));
-    adverts.add(createAdvert("Laptop", "Unwanted gift from disgruntled author. Otherwise good condition", jeff));
+    jeff.addPhone("Cell", "555 000 001");
+    jeff.addPhone("Home", "555 000 002");
+    jeff.addPhone("Work", "555 000 003");
 
-    Category category = createCategory("Computing");
-    // TODO: category.addAdvert(createAdvert("Sinclair Spectrum for Sale", "48k, original box and packaging.", dave));
-    category.setAdverts(adverts);
+    Category computing = new Category("Computing");
+    session.save(computing);
 
-    adverts = new ArrayList<Advert>();
+    computing.addAdvert("Sinclair Spectrum for Sale", "48k, original box and packaging.", dave);
+    computing.addAdvert("IBM PC for sale", "Original, not clone. 640Kb.", dave);
+    computing.addAdvert("Apple II for sale", "Complete with paddles. Call after 5pm", dave);
 
-    adverts.add(createAdvert("Elderly baby Grand Piano for sale", "Overstrung. Badly out of tune.", dave));
-    adverts.add(createAdvert("Trombone for sale", "Slide missing. £1 + £30 p&p", dave));
-    adverts.add(createAdvert("Marimba wanted", "Will offer up to £100", dave));
-    adverts.add(createAdvert("Piccolo", "Tarnished but good sound.", jeff));
-    adverts.add(createAdvert("Slightly used triangle", "Not quite triangular anymore. $1", jeff));
-    adverts.add(createAdvert("Timpani set", "$30 total, call for postage", jeff));
+    computing.addAdvert("Atari 2600 wanted", "Will pay up to $10", jeff);
+    computing.addAdvert("Timex 2000 for sale", "Some games, $30", jeff);
+    computing.addAdvert("Laptop", "Unwanted gift from disgruntled author. Otherwise good condition", jeff);
 
-    category = createCategory("Instruments");
-    category.setAdverts(adverts);
+    Category instruments = new Category("Instruments");
+    session.save(instruments);
+
+    instruments.addAdvert("Elderly baby Grand Piano for sale", "Overstrung. Badly out of tune.", dave);
+    instruments.addAdvert("Trombone for sale", "Slide missing. £1 + £30 p&p", dave);
+    instruments.addAdvert("Marimba wanted", "Will offer up to £100", dave);
+
+    instruments.addAdvert("Piccolo", "Tarnished but good sound.", jeff);
+    instruments.addAdvert("Slightly used triangle", "Not quite triangular anymore. $1", jeff);
+    instruments.addAdvert("Timpani set", "$30 total, call for postage", jeff);
 
     transaction.commit();
   }
@@ -90,73 +91,15 @@ public class ConsoleApplication {
   }
 
   // The following was derived from the source code for the book "Pro Hibernate 3" by Dave Minter and Jeff Linwood.
-  // Specifically, the UserDAO's createUser method, which is located in the Chapter03 folder.
-  public User createUser(String userName, String password) {
-    // TODO: rename createUser to just create and move it into the User class; User.create("dminter", "london")
-    User user = new User();
-    user.setName(userName);
-    user.setPassword(password);
-
-    Session session = getSession();
-    session.save(user);
-    return user;
-  }
-
-  // The following was derived from the source code for the book "Pro Hibernate 3" by Dave Minter and Jeff Linwood.
-  // Specifically, the PhoneDAO's createUser method, which is located in the Chapter03 folder.
-  public Phone createPhone(String comment, String number, User user) {
-    // TODO: rename createPhone to just create and move it into the Phone class; Phone.create("dminter", "london")
-    // TODO: give user class an addPhoneNumber(String number, String comment) method; dave.addPhoneNumber("07973 000 000", "Mobile")
-    Phone phone = new Phone();
-    phone.setUser(user);
-    phone.setNumber(number);
-    phone.setComment(comment);
-
-    Session session = getSession();
-    session.save(phone);
-    return phone;
-  }
-
-  // The following was derived from the source code for the book "Pro Hibernate 3" by Dave Minter and Jeff Linwood.
-  // Specifically, the AdvertDAO's createUser method, which is located in the Chapter03 folder.
-  public Advert createAdvert(String title, String message, User user) {
-    // TODO: rename createAdvert to just create and move it into the Advert class
-    // TODO: give user class an addAdvert(String title, String message) method;
-    // ex. jeff.addAdvert("Laptop", "Unwanted gift from disgruntled author.  Otherwise good condition.")
-    Advert advert = new Advert();
-    advert.setTitle(title);
-    advert.setMessage(message);
-    advert.setUser(user);
-
-    Session session = getSession();
-    session.save(advert);
-    return advert;
-  }
-
-  // The following was derived from the source code for the book "Pro Hibernate 3" by Dave Minter and Jeff Linwood.
-  // Specifically, the CategoryDAO's createUser method, which is located in the Chapter03 folder.
-  public Category createCategory(String title) {
-    // TODO: rename createCategory to just create and move it into the Category class
-    Category category = new Category();
-    category.setTitle(title);
-
-    Session session = getSession();
-    session.save(category);
-    return category;
-  }
-
-  // The following was derived from the source code for the book "Pro Hibernate 3" by Dave Minter and Jeff Linwood.
   // Specifically, the CategoryDAO's createUser method, which is located in the Chapter03 folder.
   public List<Category> getAllCategories() {
-    Session session = getSession();
-    Transaction transaction = getSession().beginTransaction();
-    Query query = session.createQuery("from Category");
-    List<Category> list = query.list();
-    transaction.commit();
-    return list;
+    Query query = getSession().createQuery("from Category");
+    return query.list();
   }
 
   public void displayDatabase() {
+    Transaction transaction = getSession().beginTransaction();
+
     for (Category category : getAllCategories()) {
       System.out.println("========");
       System.out.println("Category: " + category.getTitle());
@@ -175,18 +118,15 @@ public class ConsoleApplication {
         System.out.println("--------");
       }
     }
+
+    transaction.commit();
   }
 
   // The following was derived from the source code for the book "Pro Hibernate 3" by Dave Minter and Jeff Linwood.
   // Specifically, the PhoneDAO's getPhone method, which is located in the Chapter03 folder.
   public List<Phone> getPhone(User user) {
-    // TODO: this should be in the User class; jeff.getPhones()
-    Session session = getSession();
-    Transaction transaction = getSession().beginTransaction();
-    Query query = session.createQuery("from Phone phone where phone.user = :user");
+    Query query = getSession().createQuery("from Phone phone where phone.user = :user");
     query.setEntity("user", user);
-    List<Phone> list = query.list();
-    transaction.commit();
-    return list;
+    return query.list();
   }
 }

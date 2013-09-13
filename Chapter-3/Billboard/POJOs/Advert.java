@@ -1,10 +1,8 @@
 package Billboard.POJOs;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -69,5 +67,14 @@ public class Advert {
 
   public void setCategories(List<Category> categories) {
     this.categories = categories;
+  }
+
+  public Advert() {
+  }
+
+  public Advert(String title, String message, User user) {
+    this.title = title;
+    this.message = message;
+    this.user = user;
   }
 }

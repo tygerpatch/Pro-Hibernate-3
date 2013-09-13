@@ -1,13 +1,10 @@
 package Billboard.POJOs;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 // Title: Pro Hibernate 3
@@ -54,5 +51,13 @@ public class Phone {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+  public Phone() {
+  }
+
+  public Phone(String comment, String number) {
+    this.comment = comment;
+    this.number = number;
   }
 }

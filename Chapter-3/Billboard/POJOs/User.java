@@ -1,8 +1,13 @@
 package Billboard.POJOs;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 // Title: Pro Hibernate 3
 // Authors: Dave Minter, Jeff Linwood
@@ -38,5 +43,37 @@ public class User {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+  public User() {
+  }
+
+  public User(String name, String password) {
+    this.name = name;
+    this.password = password;
+  }
+
+  private List<Phone> phones = new ArrayList<Phone>();
+
+  @OneToMany(
+    mappedBy = "user",
+    targetEntity = Phone.class,
+    cascade = CascadeType.ALL)
+  public List<Phone> getPhones( ) {
+    return phones;
+  }
+
+  public void setPhones(List<Phone> phones) {
+    this.phones = phones;
+  }
+
+  public boolean addPhone(String comment, String number) {
+    Phone phone = new Phone(comment, number);
+    phone.setUser(this); // TODO: eliminate this statement
+    return addPhone(phone);
+  }
+
+  public boolean addPhone(Phone phone) {
+    return phones.add(phone);
   }
 }
