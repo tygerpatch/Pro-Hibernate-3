@@ -1,4 +1,4 @@
-package Chapter.Four.pojo;
+package BookCatalog.POJOs;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,19 +6,18 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 //Title: Pro Hibernate 3
 //Authors: Dave Minter, Jeff Linwood
 //Chapter 4 : Using Annotations with Hibernate
-//Page 79 & 80
+//Page 73
 
 @Entity
-public class Author {
-
+public class Publisher {
   protected Set<Book> books = new HashSet<Book>();
 
-  @ManyToMany(mappedBy = "authors")
+  @OneToMany(mappedBy = "publisher")
   public Set<Book> getBooks() {
     return books;
   }
@@ -40,16 +39,6 @@ public class Author {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  protected String email;
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   protected int id;

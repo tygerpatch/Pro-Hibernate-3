@@ -1,4 +1,4 @@
-package Chapter.Four.pojo;
+package BookCatalog.POJOs;
 
 import java.util.Date;
 import java.util.HashSet;

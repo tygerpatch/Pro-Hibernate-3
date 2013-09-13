@@ -1,4 +1,4 @@
-package Chapter.Four.pojo;
+package BookCatalog.POJOs;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;

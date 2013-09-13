@@ -1,7 +1,6 @@
-package Chapter.Four;
+package BookCatalog.Client;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -9,37 +8,32 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import Chapter.Four.pojo.Author;
-import Chapter.Four.pojo.Book;
-import Chapter.Four.pojo.ComputerBook;
-import Chapter.Four.pojo.Publisher;
+import BookCatalog.POJOs.Author;
+import BookCatalog.POJOs.Book;
+import BookCatalog.POJOs.ComputerBook;
+import BookCatalog.POJOs.Publisher;
 
-public class AnnotationsExample {
+public class ConsoleApplication {
   public static void main(String[] args) {
-    AnnotationConfiguration configuration = new AnnotationConfiguration();
+    ConsoleApplication app = new ConsoleApplication();
+    app.populate();
+    app.display();
+  }
 
-    configuration.addAnnotatedClass(Author.class);
-    configuration.addAnnotatedClass(Book.class);
-    configuration.addAnnotatedClass(ComputerBook.class);
-    configuration.addAnnotatedClass(Publisher.class);
+  public void populate() {
+    Session session = getSession();
+    Transaction transaction = session.beginTransaction();
 
-    configuration.configure();
-
-    SchemaExport schemaExport = new SchemaExport(configuration);
-
-    boolean script = true;  // print the DDL to the console
-    boolean export = true;  // export the script to the database
-
-    schemaExport.create(script, export);
-
-    // populate database
     Author jeff = new Author();
     jeff.setName("Jeff");
+    session.save(jeff);
 
     Author dave = new Author();
     dave.setName("Dave");
+    session.save(dave);
 
     Book book = new Book();
 
@@ -71,21 +65,15 @@ public class AnnotationsExample {
     publisher.addBook(book);
     publisher.addBook(computerBook);
 
-    SessionFactory sessionFactory = configuration.buildSessionFactory();
-    Session session = sessionFactory.openSession();
-
-    Transaction transaction = session.beginTransaction();
-
-    session.save(jeff);
-    session.save(dave);
     session.save(publisher);
-
     transaction.commit();
+  }
 
-    // display
+  public void display() {
+    Session session = getSession();
     Query query = session.createQuery("FROM Publisher p");
     query.setMaxResults(1);
-    publisher = (Publisher) query.uniqueResult();
+    Publisher publisher = (Publisher) query.uniqueResult();
 
     if (publisher == null) {
       System.out.println("No publishers found");
@@ -96,12 +84,12 @@ public class AnnotationsExample {
     Set<Book> books = publisher.getBooks();
 
     if (books != null) {
-      for(Book _book : books){
+      for (Book _book : books) {
         System.out.println("Title: " + _book.getTitle());
         Set<Author> authors = _book.getAuthors();
 
         if (authors != null) {
-          for(Author author : authors){
+          for (Author author : authors) {
             System.out.println("Author: " + author.getName());
           }
         }
@@ -115,4 +103,32 @@ public class AnnotationsExample {
     session.close();
   }
 
+  // The following was derived from the book "Hibernate Made Easy" by Cameron McKenzie.
+  // Specifically, HibernateUtil's getSession and getInitializedConfiguration methods.
+  private static SessionFactory factory;
+
+  private static Session getSession() {
+    if (factory == null) {
+      Configuration config = new AnnotationConfiguration();
+
+      // add all of your JPA annotated classes here!!!
+      config.addAnnotatedClass(Author.class);
+      config.addAnnotatedClass(Book.class);
+      config.addAnnotatedClass(ComputerBook.class);
+      config.addAnnotatedClass(Publisher.class);
+
+      config.configure();
+
+      // generate the tables
+      SchemaExport schemaExport = new SchemaExport(config);
+
+      boolean script = true; // print the DDL to the console
+      boolean export = true; // export the script to the database
+
+      schemaExport.create(script, export);
+      factory = config.buildSessionFactory();
+    }
+
+    return factory.getCurrentSession();
+  }
 }
