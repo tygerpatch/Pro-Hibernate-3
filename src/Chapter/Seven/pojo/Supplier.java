@@ -3,9 +3,26 @@ package Chapter.Seven.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Supplier {
+
+  public Supplier() {
+  }
+
+  public Supplier(String name) {
+    this.name = name;
+  }
+
   private int id;
 
+  @Id
+  @GeneratedValue
   public int getId() {
     return id;
   }
@@ -24,17 +41,19 @@ public class Supplier {
     this.name = name;
   }
 
-  private List products = new ArrayList();
+  private List<Product> products = new ArrayList<Product>();
 
-  public List getProducts() {
+  @OneToMany(mappedBy = "supplier", targetEntity = Product.class, cascade = CascadeType.ALL)
+  public List<Product> getProducts() {
     return products;
   }
 
-  public void setProducts(List products) {
+  public void setProducts(List<Product> products) {
     this.products = products;
   }
 
   public boolean addProduct(Product product) {
+    // product.setSupplier(this);
     return products.add(product);
   }
 }

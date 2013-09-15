@@ -1,26 +1,12 @@
 package Chapter.Seven.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Product {
-
-  private String description;
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  private int id;
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   private String name;
 
@@ -32,14 +18,14 @@ public class Product {
     this.name = name;
   }
 
-  private Supplier supplier;
+  private String description;
 
-  public Supplier getSupplier() {
-    return supplier;
+  public String getDescription() {
+    return description;
   }
 
-  public void setSupplier(Supplier supplier) {
-    this.supplier = supplier;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   private double price;
@@ -50,5 +36,28 @@ public class Product {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  private int id;
+
+  @Id
+  @GeneratedValue
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  private Supplier supplier;
+
+  @ManyToOne
+  public Supplier getSupplier() {
+    return supplier;
+  }
+
+  public void setSupplier(Supplier supplier) {
+    this.supplier = supplier;
   }
 }
