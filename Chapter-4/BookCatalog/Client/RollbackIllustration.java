@@ -13,7 +13,6 @@ import BookCatalog.POJOs.Author;
 import BookCatalog.POJOs.Book;
 import BookCatalog.POJOs.ComputerBook;
 import BookCatalog.POJOs.Publisher;
-import Chapter.Nine.pojo.Subscriber;
 
 // This sample code was taken from Chapter 9.
 // It was moved here because Chapter 9 was missing code to populate the database.
