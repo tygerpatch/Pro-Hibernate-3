@@ -1,4 +1,4 @@
-package Chapter.Seven;
+package Criteria.Client;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import Chapter.Seven.pojo.Product;
-import Chapter.Seven.pojo.Software;
-import Chapter.Seven.pojo.Supplier;
+import Criteria.POJOs.Product;
+import Criteria.POJOs.Software;
+import Criteria.POJOs.Supplier;
 
 public class CriteriaExample {
 

@@ -1,4 +1,4 @@
-package Chapter.Seven.pojo;
+package Criteria.POJOs;
 
 import java.util.ArrayList;
 import java.util.List;

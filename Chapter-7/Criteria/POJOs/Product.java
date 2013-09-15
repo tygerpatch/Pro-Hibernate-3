@@ -1,4 +1,4 @@
-package Chapter.Seven.pojo;
+package Criteria.POJOs;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
