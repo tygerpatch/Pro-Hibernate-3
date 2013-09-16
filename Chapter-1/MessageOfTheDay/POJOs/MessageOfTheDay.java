@@ -4,14 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
-
-
 // Title: Pro Hibernate 3
 // Authors: Dave Minter, Jeff Linwood
 // Chapter 1 : An Introduction to Hibernate 3
