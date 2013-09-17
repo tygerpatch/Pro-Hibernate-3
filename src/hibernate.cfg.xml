@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration
-    PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+  PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/my_jdbc</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pro-hibernate-3</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">password</property>
     <property name="hibernate.show_sql">true</property>
@@ -68,9 +68,7 @@
     -->
 
     <!--  Chapter 12 : Hibernate Filters -->
-    <!--
-    <mapping resource="com/hibernatebook/filters/User.hbm.xml"/>
-    -->
+    <mapping resource="Filter/POJOs/FilterUser.hbm.xml"/>
 
     <!--  Chapter 13 : Fitting Hibernate into the Existing Environment -->
     <!--
